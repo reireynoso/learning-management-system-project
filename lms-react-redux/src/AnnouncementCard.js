@@ -15,16 +15,18 @@ class AnnouncementCard extends Component {
         })
     }
 
-    getId = (url) => {
-        let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-        let match = url.match(regExp);
-    
-        if (match && match[2].length == 11) {
-            return match[2];
-        } else {
-            return 'error';
+    containsEmbed = (url) => {
+        let splitString = url.split("/")
+        if(splitString.includes('embed')){
+            return true
         }
     }
+    embedIt = (videoId) => {
+        let splitString = videoId.split("=")
+        // console.log(splitString[1])
+        return `https://www.youtube.com/embed/${splitString[1]}`
+    }
+
     
     render() {
         const {id, title, information, video_url} = this.props.announcement
@@ -32,7 +34,13 @@ class AnnouncementCard extends Component {
         <div className="ui segment">
             <h1>{title}</h1>
             <p>{information}</p>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/9DLtzc9KLiw" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+            {
+                video_url ?
+                <iframe width="560" height="315" src={this.embedIt(video_url)} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                :
+                null
+            }
+           
             <div>
             <i onClick={()=> this.handleOnClick(id)} className="trash big alternate outline icon"></i>
             <i onClick={()=> this.props.handleEditClick(id)} className="edit big outline icon"></i>
