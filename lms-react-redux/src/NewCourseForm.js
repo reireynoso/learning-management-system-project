@@ -40,7 +40,7 @@ class NewCourseForm extends Component {
         .then(data => {
             this.props.addUserCourse(data)
             // console.log(data.teacher)
-            // this.props.setUserCourse(data)
+            // this.props.setUserCourses(data)
             this.props.history.push('/courses')
         })
     }

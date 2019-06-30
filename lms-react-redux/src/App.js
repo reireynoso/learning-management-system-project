@@ -12,9 +12,6 @@ import CoursePageContainer from './CoursePageContainer';
 import NewCourseForm from './NewCourseForm'
 
 class App extends Component {
-  // state={
-  //   currentUser: {}
-  // }
 
   componentDidMount = () => {
     const token = localStorage.getItem("token")
@@ -26,17 +23,17 @@ class App extends Component {
     })
     .then(resp => resp.json())
     .then(data => {
-        console.log(data)
+        // console.log(data)
         this.props.setUser(data)
         // this.props.setUserCourses(data.courses)
+        
     })
     }
     fetch(`http://localhost:3000/api/v1/subjects`)
     .then(resp => resp.json())
     .then(data => this.props.setSubjects(data))
     }
-  
-
+    
   render() {
     return (
       <div className="App">
@@ -47,6 +44,7 @@ class App extends Component {
           <Route path='/login' component={Login}/>
           <Route path='/signUp' component={SignUp} /> 
           <Route path='/newCourseForm' component={NewCourseForm}/>
+          <Route name='announcement'path='/courses/:id/announcements' component={CoursePageContainer}/>
           <Route path='/courses/:id' component={CoursePageContainer}/>
           <Route path='/courses' component={UserHomePage} />
           <Route path='/' component={UserHomePage} />

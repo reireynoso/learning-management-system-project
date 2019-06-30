@@ -1,3 +1,3 @@
 class AnnouncementSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :title, :information, :video_url
 end

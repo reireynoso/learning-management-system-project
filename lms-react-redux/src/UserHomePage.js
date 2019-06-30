@@ -1,11 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import CourseContainer from './CourseContainer'
-import CoursePageContainer from './CoursePageContainer'
-import { Switch, Route} from 'react-router-dom';
 
 function UserHomePage(props) {
     // console.log(props.currentUserCourses)
+    // console.log(props.currentUser.courses)
     return (
         <div>
             {

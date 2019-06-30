@@ -19,7 +19,10 @@ function CourseCard(props) {
         <div className="column">
                 <div className="ui segment">
                     <p>{props.course.subject.name}</p>
-                    <Link to={`/courses/${props.course.id}`}>
+                    <Link to={{
+                        pathname: `/courses/${props.course.id}`,
+                        courseProps: props.course
+                        }}>
                         <h1>{props.course.name}</h1>
                     </Link>
                     <br></br>

@@ -10,7 +10,9 @@ Rails.application.routes.draw do
       end
       resources :students, only: [:index, :create, :show]
       resources :subjects, only: [:index,:show]
-      # resources :courses, only: [:index,:show, :create]
+      resources :courses, only: [:index,:show] do 
+        resources :announcements, only: [:create, :destroy,:update]
+      end
     end
   end
 end
