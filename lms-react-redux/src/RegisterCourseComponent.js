@@ -55,17 +55,19 @@ class RegisterCourseComponent extends Component {
             this.props.history.push('/courses')
         })
     }
-    handleClassName = (courseInput) => {
-        // console.log(course)
-        // console.log(this.props.currentUser.courses)
+    foundMatchMethod = (courseInput) => {
+        //handles match for course registration. if match is found, changes text and className of Course Card
         let foundMatch;
         if(this.props.currentUser.courses !== undefined){
             foundMatch = this.props.currentUser.courses.find(course => {
                 return course.id === courseInput.id
             })
         }
-        // console.log(foundMatch)
-        if(foundMatch){
+        return foundMatch
+    }
+    handleClassName = (courseInput) => {
+        
+        if(this.foundMatchMethod(courseInput)){
             return "ui red disabled button"
         }
         else{
@@ -73,16 +75,7 @@ class RegisterCourseComponent extends Component {
         }
     }
     handleText = (courseInput) => {
-        // console.log(course)
-        // console.log(this.props.currentUser.courses)
-        let foundMatch;
-        if(this.props.currentUser.courses !== undefined){
-            foundMatch = this.props.currentUser.courses.find(course => {
-                return course.id === courseInput.id
-            })
-        }
-        // console.log(foundMatch)
-        if(foundMatch){
+        if(this.foundMatchMethod(courseInput)){
             return "Already Registered"
         }
         else{
@@ -92,7 +85,6 @@ class RegisterCourseComponent extends Component {
     render() {
         // console.log(this.props.currentUser.courses)
         // console.log(this.props.allCourses)
-        
         return (
         <div className="ui container">
                 <br></br>

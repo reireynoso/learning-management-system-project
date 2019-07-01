@@ -38,7 +38,7 @@ class App extends Component {
     fetch(`http://localhost:3000/api/v1/courses`)
     .then(resp => resp.json())
     .then(data => {
-      console.log(data)
+      // console.log(data)
       this.props.setCourses(data)
     })
     

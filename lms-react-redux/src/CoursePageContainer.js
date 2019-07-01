@@ -38,7 +38,7 @@ class CoursePageContainer extends Component {
         })
     }
     render() {
-        // console.log(this.props.currentUserCourses)
+        console.log(this.props.currentUser)
         // let url = this.props.history.location.pathname.split("/")
         // console.log(url[url.length-1])
         // console.log(this.props.course.announcements)
@@ -59,7 +59,14 @@ class CoursePageContainer extends Component {
                 <div className="twelve wide column">
                     <div style={containerStyle}>
                         <h1>Announcements</h1>
-                        <NewAnnouncementForm url={this.url[this.url.length-1]}/>
+                        {
+                            //checks if currentUser is defined and also if the user is a teacher
+                            Object.keys(this.props.currentUser).length !== 0 && this.props.currentUser.position === "teacher" ? 
+                            <NewAnnouncementForm url={this.url[this.url.length-1]}/>
+                            :
+                            null
+                        }
+                        
                         {
                             this.props.course.announcements !== undefined ?
                             // null
@@ -130,7 +137,8 @@ class CoursePageContainer extends Component {
 function mapStateToProps(state){
     return{
         // currentUserCourses: state.currentUserCourses
-        course: state.currentCourse
+        course: state.currentCourse,
+        currentUser: state.currentUser
     }
 }
 
