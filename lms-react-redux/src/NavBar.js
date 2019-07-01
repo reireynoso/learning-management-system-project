@@ -64,6 +64,7 @@ function mapDispatchToProps(dispatch){
         logOutUser: () => {
             localStorage.clear();
             dispatch({type: "LOG_OUT"})
+            
         } 
     }
 }

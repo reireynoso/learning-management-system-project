@@ -1,8 +1,11 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+// import lifecycle from 'react-pure-lifecycle';
 
-export default function LandingPage() {
+function LandingPage() {
+
     return (
+        
         <div>
             <div className="pusher">
                 <div className="ui inverted vertical masthead center aligned segment">
@@ -50,3 +53,11 @@ export default function LandingPage() {
         </div>
     )
 }
+
+// const methods = {
+//     componentDidMount(){
+//         window.location.reload();
+//     }
+// }
+
+export default LandingPage

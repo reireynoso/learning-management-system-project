@@ -2,6 +2,7 @@ const defaultState = {
     currentUser: {},
     // currentUserCourses: [],
     subjects: [],
+    allCourses: [],
     currentCourse: {}
 }
 
@@ -24,6 +25,17 @@ function reducer(state= defaultState, action){
             // return {...state, currentUserCourses: courseRemoved}
         case "SET_SUBJECTS":
             return {...state, subjects: action.payload}
+        case "SET_ALL_COURSES":
+            // debugger
+            return {...state, allCourses: action.payload}
+        case "ADD_COURSE_TO_ALL_COURSES":
+            return {...state, allCourses: [...state.allCourses, action.payload]}
+        case "REMOVE_COURSE_FROM_ALL_COURSES":
+            const courseRemovedAll = state.allCourses.filter(course => {
+                return course.id !== action.payload
+            })
+            // debugger
+            return {...state, allCourses: courseRemovedAll}
         case "SET_COURSE":
             return {...state, currentCourse : action.payload}
         case "ADD_ANNOUNCEMENT":

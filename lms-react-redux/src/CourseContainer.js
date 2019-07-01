@@ -2,7 +2,7 @@ import React from 'react'
 import CourseCard from './CourseCard'
 
 export default function CourseContainer(props) {
-    // console.log(props.courses === undefined)
+    // console.log(props.courses)
     return (
     <div className="ui container" >
         {

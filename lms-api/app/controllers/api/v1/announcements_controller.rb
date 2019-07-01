@@ -27,6 +27,7 @@ class Api::V1::AnnouncementsController < ApplicationController
     end
 
     def destroy
+        byebug
         Announcement.delete(params[:id])
         render json: {success: "Announcement deleted"}
     end

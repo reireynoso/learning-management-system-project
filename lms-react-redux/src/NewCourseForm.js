@@ -39,6 +39,7 @@ class NewCourseForm extends Component {
         .then(resp => resp.json())
         .then(data => {
             this.props.addUserCourse(data)
+            this.props.addCourseToAllCourses(data)
             // console.log(data.teacher)
             // this.props.setUserCourses(data)
             this.props.history.push('/courses')
@@ -87,6 +88,9 @@ function mapDispatchToProps(dispatch){
     return {
         addUserCourse: (newCourse) => {
             dispatch({type:"ADD_COURSE", payload: newCourse})
+        },
+        addCourseToAllCourses: (newCourse) => {
+            dispatch({type: "ADD_COURSE_TO_ALL_COURSES", payload: newCourse})
         }
     }
 }

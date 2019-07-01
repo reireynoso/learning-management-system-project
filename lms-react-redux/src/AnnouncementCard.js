@@ -36,7 +36,7 @@ class AnnouncementCard extends Component {
             <p>{information}</p>
             {
                 video_url ?
-                <iframe width="560" height="315" src={this.embedIt(video_url)} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                <iframe width="500" height="300" src={this.embedIt(video_url)} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                 :
                 null
             }

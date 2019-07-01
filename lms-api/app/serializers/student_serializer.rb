@@ -1,3 +1,6 @@
 class StudentSerializer < ActiveModel::Serializer
-  attributes :id, :username, :first_name,:last_name,:bio,:image_url,:position
+  has_many :enrollments
+  has_many :courses, through: :enrollments
+  attributes :id, :username, :first_name,:last_name,:bio,:image_url,:position, :courses
+
 end

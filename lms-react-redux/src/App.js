@@ -10,6 +10,7 @@ import UserHomePage from './UserHomePage';
 import CoursePage from './CoursePageContainer'
 import CoursePageContainer from './CoursePageContainer';
 import NewCourseForm from './NewCourseForm'
+import RegisterCourseComponent from './RegisterCourseComponent'
 
 class App extends Component {
 
@@ -28,11 +29,21 @@ class App extends Component {
         // this.props.setUserCourses(data.courses)
         
     })
+    
     }
     fetch(`http://localhost:3000/api/v1/subjects`)
     .then(resp => resp.json())
     .then(data => this.props.setSubjects(data))
-    }
+
+    fetch(`http://localhost:3000/api/v1/courses`)
+    .then(resp => resp.json())
+    .then(data => {
+      console.log(data)
+      this.props.setCourses(data)
+    })
+    
+  }
+    
     
   render() {
     return (
@@ -44,6 +55,7 @@ class App extends Component {
           <Route path='/login' component={Login}/>
           <Route path='/signUp' component={SignUp} /> 
           <Route path='/newCourseForm' component={NewCourseForm}/>
+          <Route path='/registerCourse' component={RegisterCourseComponent}/>
           <Route name='announcement'path='/courses/:id/announcements' component={CoursePageContainer}/>
           <Route path='/courses/:id' component={CoursePageContainer}/>
           <Route path='/courses' component={UserHomePage} />
@@ -72,6 +84,9 @@ function mapDispatchToProps(dispatch){
       // },
       setSubjects: (subjectArray) => {
         dispatch({type: "SET_SUBJECTS", payload: subjectArray})
+      },
+      setCourses: (coursesArray) => {
+        dispatch({type: "SET_ALL_COURSES", payload: coursesArray})
       }
   }
 } 
