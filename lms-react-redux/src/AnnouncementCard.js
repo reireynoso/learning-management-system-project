@@ -1,6 +1,6 @@
 // import React from 'react'
 import {connect} from 'react-redux'
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 
 class AnnouncementCard extends Component {
     handleOnClick = (id) =>{
@@ -42,12 +42,28 @@ class AnnouncementCard extends Component {
             }
            
             <div>
-            <i onClick={()=> this.handleOnClick(id)} className="trash big alternate outline icon"></i>
-            <i onClick={()=> this.props.handleEditClick(id)} className="edit big outline icon"></i>
+            {
+                //checks if currentUser is defined and also if the user is a teacher
+                Object.keys(this.props.currentUser).length !== 0 && this.props.currentUser.position === "teacher" ? 
+                <Fragment>
+                    <i onClick={()=> this.handleOnClick(id)} className="trash big alternate outline icon"></i>
+                    <i onClick={()=> this.props.handleEditClick(id)} className="edit big outline icon"></i>
+                </Fragment>   
+                :
+                null
+            }
+            {/* <i onClick={()=> this.handleOnClick(id)} className="trash big alternate outline icon"></i>
+            <i onClick={()=> this.props.handleEditClick(id)} className="edit big outline icon"></i> */}
             </div>
             
         </div>
         )
+    }
+}
+
+function mapStateToProps(state){
+    return {
+        currentUser: state.currentUser
     }
 }
 
@@ -59,4 +75,4 @@ function mapDispatchToProps(dispatch){
     }
 }
 
-export default connect(null, mapDispatchToProps)(AnnouncementCard)
+export default connect(mapStateToProps, mapDispatchToProps)(AnnouncementCard)

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  question: MyString
+  integer: MyString
+  assignment_id: MyString
+
+two:
+  question: MyString
+  integer: MyString
+  assignment_id: MyString

@@ -56,7 +56,7 @@ class RegisterCourseComponent extends Component {
         })
     }
     foundMatchMethod = (courseInput) => {
-        //handles match for course registration. if match is found, changes text and className of Course Card
+        //handles match for course registration. if match is found, changes text and className of Course
         let foundMatch;
         if(this.props.currentUser.courses !== undefined){
             foundMatch = this.props.currentUser.courses.find(course => {
@@ -85,6 +85,7 @@ class RegisterCourseComponent extends Component {
     render() {
         // console.log(this.props.currentUser.courses)
         // console.log(this.props.allCourses)
+        
         return (
         <div className="ui container">
                 <br></br>

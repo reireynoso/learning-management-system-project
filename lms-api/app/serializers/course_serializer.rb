@@ -2,7 +2,8 @@ class CourseSerializer < ActiveModel::Serializer
   belongs_to :subject
   belongs_to :teacher
   has_many :announcements
-  attributes :id, :name, :subject, :announcements, :teacher
+  has_many :assignments
+  attributes :id, :name, :subject, :announcements, :teacher, :assignments
 
   def subject 
     {

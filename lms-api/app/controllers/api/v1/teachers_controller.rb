@@ -1,4 +1,5 @@
 class Api::V1::TeachersController < ApplicationController
+    # skip_before_action :require_login, only: [:create]
     def index 
         @teachers = Teacher.all 
         render json: @teachers

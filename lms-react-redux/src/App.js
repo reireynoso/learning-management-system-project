@@ -11,6 +11,7 @@ import CoursePage from './CoursePageContainer'
 import CoursePageContainer from './CoursePageContainer';
 import NewCourseForm from './NewCourseForm'
 import RegisterCourseComponent from './RegisterCourseComponent'
+import NewAssignmentForm from './NewAssignmentForm'
 
 class App extends Component {
 
@@ -49,20 +50,32 @@ class App extends Component {
     return (
       <div className="App">
         <NavBar/>
+        {/* {
+          Object.keys(this.props.currentUser).length !== 0 ?  */}
+          <Switch>
 
-        <Switch>
-          <Route path="/home" component={LandingPage}/>
           <Route path='/login' component={Login}/>
           <Route path='/signUp' component={SignUp} /> 
+
+          <Route path="/home" component={LandingPage}/>
           <Route path='/newCourseForm' component={NewCourseForm}/>
           <Route path='/registerCourse' component={RegisterCourseComponent}/>
-          <Route name='announcement'path='/courses/:id/announcements' component={CoursePageContainer}/>
+          <Route path="/courses/:id/:assignments/new" component={NewAssignmentForm}/>
+          <Route path='/courses/:id/announcements' component={CoursePageContainer}/>
           <Route path='/courses/:id' component={CoursePageContainer}/>
           <Route path='/courses' component={UserHomePage} />
           <Route path='/' component={UserHomePage} />
           <Route render={() => <Redirect to = "/home"/>}/>
         </Switch>
-        
+        {/* // :
+        // <Switch>
+        //     <Route path='/login' component={Login}/>
+        //     <Route path='/signUp' component={SignUp} /> 
+        //     <Route path="/home" component={LandingPage}/>
+        //     <Route path='/' render={() => <Redirect to= "/login" />} />
+        // </Switch>
+          
+        // } */}
     </div>
     )
   }

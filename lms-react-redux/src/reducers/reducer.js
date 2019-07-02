@@ -36,6 +36,14 @@ function reducer(state= defaultState, action){
             })
             // debugger
             return {...state, allCourses: courseRemovedAll}
+        case "ADD_ASSIGNMENT_TO_COURSE":
+                return {...state, currentCourse : {...state.currentCourse, assignments: [...state.currentCourse.assignments, action.payload]}}
+        case "REMOVE_ASSIGNMENT_FROM_COURSE":
+                const assignmentRemoved = state.currentCourse.assignments.filter(assignment => {
+                    return assignment.id !== action.payload
+                })
+                // console.log(assignmentRemoved)
+                return {...state, currentCourse : {...state.currentCourse, assignments: assignmentRemoved}}
         case "SET_COURSE":
             return {...state, currentCourse : action.payload}
         case "ADD_ANNOUNCEMENT":

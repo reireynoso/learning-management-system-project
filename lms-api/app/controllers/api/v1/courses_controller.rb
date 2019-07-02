@@ -1,7 +1,9 @@
 class Api::V1::CoursesController < ApplicationController
-
+    # skip_before_action :require_login, only: [:index]
     def index 
         @courses = Course.all
+        # byebug
+
         render json: @courses
     end
 
@@ -19,8 +21,8 @@ class Api::V1::CoursesController < ApplicationController
     end
 
     def show 
-        # byebug
         @course = Course.find(params[:id])
+        # byebug
         render json: @course
     end
 
