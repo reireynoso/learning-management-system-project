@@ -100,6 +100,7 @@ class RegisterCourseComponent extends Component {
                         Sort By Subject
                         <i className="dropdown icon"></i>
                         <div className="menu">
+                        <div onClick={() => this.handleSubjectClick("")} className="item">All Subjects</div>
                         {this.props.subjects.map(subject => {
                             return <div key={subject.id} onClick={() => this.handleSubjectClick(subject.name)} className="item">{subject.name}</div>
                         })}
