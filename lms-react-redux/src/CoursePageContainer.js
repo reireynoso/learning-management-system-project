@@ -6,7 +6,7 @@ import Assignment from './Assignment'
 import NewAnnouncementForm from './NewAnnouncementForm'
 import EditAnnouncementForm from './EditAnnouncementForm'
 import AssignmentProblemComponent from './AssignmentProblemsComponent'
-import NewProblemsComponent from './NewProblemsComponent'
+// import NewProblemsComponent from './NewProblemsComponent'
 
 const containerStyle = {
     border: "2px solid black"

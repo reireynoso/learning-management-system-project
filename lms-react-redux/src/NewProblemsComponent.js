@@ -27,12 +27,12 @@ class NewProblemsComponent extends Component {
         })
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
             this.props.addProblemToAssignment(data, this.props.assignmentObject.id)
         })
     }
     render() {
-        console.log(this.props.currentCourse.assignments)
+        // console.log(this.props.currentCourse.assignments)
         const {id, due_date, name, note, problems} = this.props.assignmentObject
         return (
             <div>
