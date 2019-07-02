@@ -50,7 +50,7 @@ class NewProblemsComponent extends Component {
                         </div>
                     })}    */}
                     {this.props.currentCourse.assignments.map(assignment => {
-                        if(assignment.id == id){
+                        if(assignment.id === id){
                             return assignment.problems.map(problem => {
                                 return <div className="ui segment" key={problem.id}>
                                     <h2>Question: {problem.question}</h2>
