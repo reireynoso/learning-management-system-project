@@ -43,7 +43,22 @@ function reducer(state= defaultState, action){
                     return assignment.id !== action.payload
                 })
                 // console.log(assignmentRemoved)
-                return {...state, currentCourse : {...state.currentCourse, assignments: assignmentRemoved}}
+            return {...state, currentCourse : {...state.currentCourse, assignments: assignmentRemoved}}
+        case "ADD_PROBLEM_TO_ASSIGNMENT":
+            // console.log(state.currentCourse)
+            // console.log(action.payload)
+            const matchAssignment = state.currentCourse.assignments.map(assignment => {
+                // debugger
+                if(assignment.id === action.payload.assignmentId){
+                    
+                    assignment.problems = [...assignment.problems, action.payload.question]
+                    return assignment
+                }
+                else{
+                    return assignment
+                }
+            })
+            return {...state, currentCourse : {...state.currentCourse, assignments: matchAssignment}}
         case "SET_COURSE":
             return {...state, currentCourse : action.payload}
         case "ADD_ANNOUNCEMENT":

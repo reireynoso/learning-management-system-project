@@ -6,6 +6,7 @@ import Assignment from './Assignment'
 import NewAnnouncementForm from './NewAnnouncementForm'
 import EditAnnouncementForm from './EditAnnouncementForm'
 import AssignmentProblemComponent from './AssignmentProblemsComponent'
+import NewProblemsComponent from './NewProblemsComponent'
 
 const containerStyle = {
     border: "2px solid black"
@@ -15,16 +16,23 @@ class CoursePageContainer extends Component {
     //once here. a separate fetch MUST be made to course model.
     state = {
         editAssignmentId: '',
-        renderAssignment: false,
-        assignmentObject: {}
+        assignmentObject: {},
+        currentView: ''
     }
 
     handleAssignmentClick = (assignment) => {
         // console.log(assignment)
-        this.setState({
-            assignmentObject: assignment,
-            renderAssignment: !this.state.renderAssignment
-        })
+        if(this.state.currentView === "assignments" && assignment.id === this.state.assignmentObject.id){
+            this.setState({
+                currentView: ''
+            })
+        }
+        else{
+            this.setState({
+                assignmentObject: assignment,
+                currentView: 'assignments'
+            })
+        } 
     }
     url = this.props.history.location.pathname.split("/")
     componentDidMount = () => {
@@ -73,15 +81,14 @@ class CoursePageContainer extends Component {
                                 :
                                 null
                             }
-                            
-                            
+                     
                         </div>
                         {/* <h1>Assignments</h1> */}
                         {
                             this.props.course.assignments !== undefined ?
                             // null
                             this.props.course.assignments.map(assignment => {
-                                    return <Assignment handleAssignmentClick={this.handleAssignmentClick} handleEditClick={this.handleEditClick} key={assignment.id} url={this.url[this.url.length-1]} assignment={assignment}/>
+                                    return <Assignment handleProblemClick={this.handleProblemClick} handleAssignmentClick={this.handleAssignmentClick} handleEditClick={this.handleEditClick} key={assignment.id} url={this.url[this.url.length-1]} assignment={assignment}/>
                             })
                             :
                             null
@@ -91,11 +98,10 @@ class CoursePageContainer extends Component {
 
                 <div className="ten wide column">
                     <div style={containerStyle}>
+                  
+                    {this.state.currentView ? 
                     
-                    {this.state.renderAssignment ? 
-                    
-                    <AssignmentProblemComponent assignmentObject={this.state.assignmentObject}/>
-                        
+                    <AssignmentProblemComponent assignmentObject={this.state.assignmentObject}/> 
                     :
                     <Fragment> 
                         <h1>Announcements</h1>

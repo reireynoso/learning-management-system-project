@@ -37,17 +37,26 @@ class Login extends Component {
             .then(res => res.json())
             .then(user => {
                 localStorage.setItem("token", user.jwt)
-                // console.log(user.user)
-                this.props.changeUser(user.user)
-                this.props.history.push('/courses')
+                if(user.failure){
+                    // console.log(user.failure)
+                    // alert(user.failure)
+                    this.props.handleErrorMessage(user.failure)
+                }
+                else{
+                    this.props.changeUser(user.user)
+                    this.props.history.push('/courses')
+                }
+                
             })
         }
         else{
-            alert('Please choose if a teacher or student')
+            // alert('Please choose if a teacher or student')
+            this.props.handleErrorMessage("Please select if a teacher or student")
         }  
     }
     render() {
-        // console.log(this.props.history)
+        // console.log(this.props.errorState)
+        // console.log(this.props.errorState.errorMessage)
         return (
             <div className="ui container">
                 <div className="ui buttons">
@@ -69,7 +78,21 @@ class Login extends Component {
                     </div>
 
                     <button className="ui button" type="submit">Login</button>
-                </form>      
+                </form>  
+                {this.props.errorState.errors ? 
+                <div className="ui error message">
+                <div className="header">
+                    Errors with your submission
+                </div>
+                <ul className="list">
+                    <li>{this.props.errorState.errorMessage}</li>
+                </ul>
+                </div>
+                :
+                null
+                }
+               
+    
             </div>
         )
     }

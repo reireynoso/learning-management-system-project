@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component,Fragment } from 'react'
 import {connect} from 'react-redux'
 import Moment from 'react-moment'
 
@@ -17,19 +17,28 @@ class Assignment extends Component {
         // this.props.removeAssignment(id);
     }
 
+    handleEditClick = (assignmentClicked) => {
+        // console.log(assignmentClicked)
+        this.props.handleProblemClick(assignmentClicked)
+    } 
+
     render() {
-        console.log(this.props.assignment.problems)
+        // console.log(this.props.assignment.problems)
     
         return (
             <div className="ui segment">
                 <h3>{this.props.assignment.name}</h3>
                 <h4>{this.props.assignment.note}</h4>
-                {/* <h4>Due: <Moment format="MM/DD/YYYY">{this.props.assignment.due_date}</Moment></h4> */}
+                <h4>Due: <Moment format="MM/DD/YYYY">{this.props.assignment.due_date}</Moment></h4>
                 {/* <h1><Moment format="MM/DD/YYYY">{Date.now()}</Moment></h1>  */}
                 {/* <h4>Due {<Moment fromNow>{this.props.assignment.due_date}</Moment>}</h4> */}
                 {
                     Object.keys(this.props.currentUser).length !== 0 && this.props.currentUser.position === "teacher" ?
-                    <i onClick={() => this.handleOnClick(this.props.assignment.id)} className="trash big icon"></i>          
+                    <Fragment>
+                        <i onClick={() => this.handleOnClick(this.props.assignment.id)} className="trash big icon"></i> 
+                        <i onClick={()=> this.props.handleAssignmentClick(this.props.assignment)}className="edit big icon"></i>  
+                    </Fragment>
+                          
                     :
                     <button onClick={() => this.props.handleAssignmentClick(this.props.assignment)} className="ui teal button">Start</button>
                 }

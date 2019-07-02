@@ -4,6 +4,11 @@ class Api::V1::AssignmentsController < ApplicationController
         render json: @assignments
     end
 
+    def show
+        @assignment = Assignment.find(params[:id])
+        render json: @assignment
+    end
+
     def create
         # byebug
         @assignment = Assignment.create(assignments_params)

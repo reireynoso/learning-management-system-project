@@ -15,6 +15,18 @@ import NewAssignmentForm from './NewAssignmentForm'
 
 class App extends Component {
 
+  state = {
+    errors: false,
+    errorMessage: ""
+  }
+
+  handleErrorMessage = (input) => {
+    this.setState({
+      errors: true,
+      errorMessage: input
+    })
+  }
+
   componentDidMount = () => {
     const token = localStorage.getItem("token")
     if(token){
@@ -54,7 +66,7 @@ class App extends Component {
           Object.keys(this.props.currentUser).length !== 0 ?  */}
           <Switch>
 
-          <Route path='/login' component={Login}/>
+          <Route path='/login' render={(routerProps) => {return <Login handleErrorMessage={this.handleErrorMessage} errorState={this.state} {...routerProps}/>}}/>
           <Route path='/signUp' component={SignUp} /> 
 
           <Route path="/home" component={LandingPage}/>

@@ -47,7 +47,7 @@ class NewAssignmentForm extends Component {
     }
     render() {
         // console.log(this.props.history.location)
-        let currentCourse = this.props.history.location.pathname.split("/")[2]; //grabs current course id based on path name. ORDER of path is important
+        // let currentCourse = this.props.history.location.pathname.split("/")[2]; //grabs current course id based on path name. ORDER of path is important
         // console.log(currentCourse)
         // console.log(this.state.course_id)
         // console.log(this.state.due_date)
