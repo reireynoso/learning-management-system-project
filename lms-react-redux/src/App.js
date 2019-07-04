@@ -12,6 +12,7 @@ import CoursePageContainer from './CoursePageContainer';
 import NewCourseForm from './NewCourseForm'
 import RegisterCourseComponent from './RegisterCourseComponent'
 import NewAssignmentForm from './NewAssignmentForm'
+import SubmittedAssignments from './SubmittedAssignments';
 
 class App extends Component {
 
@@ -25,6 +26,13 @@ class App extends Component {
       errors: true,
       errorMessage: input
     })
+
+    window.setTimeout(() => {
+      this.setState({
+        errors: false,
+        errorMessage: ''
+      });
+    }, 2000);
   }
 
   componentDidMount = () => {
@@ -71,6 +79,7 @@ class App extends Component {
 
           <Route path="/home" component={LandingPage}/>
           <Route path='/newCourseForm' component={NewCourseForm}/>
+          <Route path='/courses/:id/assignments/:id/submissions' component={SubmittedAssignments}/> >
           <Route path='/registerCourse' component={RegisterCourseComponent}/>
           <Route path="/courses/:id/:assignments/new" component={NewAssignmentForm}/>
           <Route path='/courses/:id/announcements' component={CoursePageContainer}/>

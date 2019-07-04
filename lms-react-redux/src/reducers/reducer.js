@@ -3,7 +3,8 @@ const defaultState = {
     // currentUserCourses: [],
     subjects: [],
     allCourses: [],
-    currentCourse: {}
+    currentCourse: {},
+    currentAssignment: {}
 }
 
 function reducer(state= defaultState, action){
@@ -28,6 +29,21 @@ function reducer(state= defaultState, action){
         case "SET_ALL_COURSES":
             // debugger
             return {...state, allCourses: action.payload}
+        case "SET_ASSIGNMENT":
+            // return {...state, currentUserCourses: [...state.currentUserCourses, action.payload]}
+            return {...state, currentAssignment: action.payload}
+        case "UPDATE_SUBMISSION_IN_CURRENT_ASSIGNMENT":
+                const updateSubmissions = state.currentAssignment.submissions.map(submission => {
+                    if(submission.id === action.payload.id){
+                        submission = action.payload
+                        return submission
+                    }
+                    else {
+                        return submission
+                    }
+                })
+                // debugger
+                return {...state, currentAssignment: {...state.currentAssignment, submissions: updateSubmissions}}
         case "ADD_COURSE_TO_ALL_COURSES":
             return {...state, allCourses: [...state.allCourses, action.payload]}
         case "REMOVE_COURSE_FROM_ALL_COURSES":
@@ -61,6 +77,20 @@ function reducer(state= defaultState, action){
             return {...state, currentCourse : {...state.currentCourse, assignments: matchAssignment}}
         case "SET_COURSE":
             return {...state, currentCourse : action.payload}
+        // case "SUBMIT_ASSIGNMENT_TO_COURSE":
+        //     // debugger
+        //     const submitted = state.currentCourse.assignments.map(assignment => {
+        //         if(assignment.id === action.payload.assignment.id){
+        //             assignment.submissions = [...assignment.submissions, action.payload]
+        //             return assignment
+        //         }
+        //         else{
+        //             return assignment
+        //         }
+        //     })
+        //     // debugger
+        //     return {...state, currentCourse : {...state.currentCourse, assignments: submitted}}
+
         case "ADD_ANNOUNCEMENT":
             return {...state, currentCourse : {...state.currentCourse, announcements: [...state.currentCourse.announcements, action.payload]}}
         case "EDIT_ANNOUNCEMENT":

@@ -1,6 +1,7 @@
 import React, { Component,Fragment } from 'react'
 import {connect} from 'react-redux'
 import NewProblemsComponent from './NewProblemsComponent'
+import SubmissionComponent from './SubmissionComponent'
 
 class AssignmentProblemsComponent extends Component {
     render() {
@@ -14,22 +15,23 @@ class AssignmentProblemsComponent extends Component {
                     <NewProblemsComponent assignmentObject={this.props.assignmentObject}/>
                     
                     :
-                    <Fragment>
+                    // <Fragment>
             
-                    <form className="ui tiny form">
-                        <div className="field">
-                            {/* <label>Information</label> */}
-                            {problems.map(problem => {
-                                return <div className="ui segment" key={problem.id}>
-                                    <h2>Question: {problem.question}</h2>
-                                    <textarea onChange={this.handleOnChange} name="information" placeholder="Solution" rows="2" ></textarea>
-                                </div>
-                            })}   
-                        </div>
-                        <input type="submit" value="Submit Assignment" className="ui submit button"></input>
+                    // <form className="ui tiny form">
+                    //     <div className="field">
+                    //         {/* <label>Information</label> */}
+                    //         {problems.map(problem => {
+                    //             return <div className="ui segment" key={problem.id}>
+                    //                 <h2>Question: {problem.question}</h2>
+                    //                 <textarea onChange={this.handleOnChange} name="information" placeholder="Solution" rows="2" ></textarea>
+                    //             </div>
+                    //         })}   
+                    //     </div>
+                    //     <input type="submit" value="Submit Assignment" className="ui submit button"></input>
                         
-                    </form>
-                    </Fragment>
+                    // </form>
+                    // </Fragment>
+                    <SubmissionComponent currentUser={this.props.currentUser} assignmentObject={this.props.assignmentObject}/>
                     
                 }
                 

@@ -4,7 +4,7 @@ import CourseContainer from './CourseContainer'
 import {Link} from 'react-router-dom'
 
 function UserHomePage(props) {
-    // console.log(props.currentUserCourses)
+    // console.log(props)
     // console.log(props.currentUser.courses)
     return (
         <div>

@@ -45,7 +45,7 @@ class CoursePageContainer extends Component {
         .then(resp => resp.json())
         .then(data => {
             this.props.setCourse(data)
-            // console.log(data.announcements)
+            // console.log(data)
         })
     }
     handleOnClick = (category) => {
@@ -63,10 +63,11 @@ class CoursePageContainer extends Component {
     }
 
     render() {
-        // console.log(this.props.currentUser)
+        // console.log('helllo')
         // let url = this.props.history.location.pathname.split("/")
         // console.log(url[url.length-1])
         // console.log(this.state.assignmentObject)
+        // console.log(this.props.currentCourse)
         return (
             <div className="ui grid container" style={{marginTop: "10px"}}>
                 <div className="six wide column">

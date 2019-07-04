@@ -44,7 +44,7 @@ function CourseCard(props) {
         })
         .then(resp => resp.json())
         .then(data => {
-            console.log(data) //returns json message of delete success
+            // console.log(data) //returns json message of delete success
             props.removeCourse(props.course.id)
         })
     }

@@ -15,9 +15,12 @@ Rails.application.routes.draw do
       resources :courses, only: [:index,:show] do 
         resources :announcements, only: [:create, :destroy,:update]
         resources  :assignments, only: [:index, :create, :show, :destroy] do 
-          resources :problems, only: [:index, :show, :create, :destroy]
+          resources :problems, only: [:index, :show, :create, :destroy] 
+          # resources :submissions, only: [:index, :show, :update] 
         end
       end
+      resources :submissions, only: [:index, :create, :show, :update]
+      resources :answers, only: [:index,:show,:update]
     end
   end
 end

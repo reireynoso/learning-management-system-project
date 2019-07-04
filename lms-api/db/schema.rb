@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_01_224531) do
+ActiveRecord::Schema.define(version: 2019_07_03_012810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,17 @@ ActiveRecord::Schema.define(version: 2019_07_01_224531) do
     t.string "information"
     t.string "video_url"
     t.integer "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "answers", force: :cascade do |t|
+    t.string "question"
+    t.string "answer"
+    t.integer "student_id"
+    t.integer "problem_id"
+    t.integer "submission_id"
+    t.integer "points_assigned"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -69,6 +80,15 @@ ActiveRecord::Schema.define(version: 2019_07_01_224531) do
 
   create_table "subjects", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "submissions", force: :cascade do |t|
+    t.datetime "date_submitted"
+    t.integer "grade_assigned"
+    t.integer "assignment_id"
+    t.integer "student_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

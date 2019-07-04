@@ -3,8 +3,7 @@ import {connect} from 'react-redux'
 
 class NewProblemsComponent extends Component {
     state = {
-        question: '',
-        assignment_id: this.props.assignmentObject.id
+        question: ''
     }
 
     handleOnChange = (e) => {
@@ -22,7 +21,10 @@ class NewProblemsComponent extends Component {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                problem: this.state
+                problem: {
+                    question: this.state.question,
+                    assignment_id: this.props.assignmentObject.id
+                }
             })
         })
         .then(resp => resp.json())

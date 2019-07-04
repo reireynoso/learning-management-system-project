@@ -1,4 +1,5 @@
 class ProblemSerializer < ActiveModel::Serializer
   # belongs_to :assignment
-  attributes :id, :question
+  has_many :answers
+  attributes :id, :question, :answers
 end
