@@ -39,7 +39,9 @@ class Api::V1::SubmissionsController < ApplicationController
         # byebug
         @submission = Submission.find(params[:id])
         @submission.update(grade_assigned: params[:grade])
+        # byebug
         render json: @submission
+        # render json: {submission: SubmissionSerializer.new(@submission)}
     end
 
     private

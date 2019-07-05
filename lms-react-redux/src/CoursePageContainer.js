@@ -9,7 +9,10 @@ import AssignmentProblemComponent from './AssignmentProblemsComponent'
 // import NewProblemsComponent from './NewProblemsComponent'
 
 const containerStyle = {
-    border: "2px solid black"
+    border: "2px solid black",
+    borderRadius: "20px",
+    overflow: "hidden"
+    
 }
 class CoursePageContainer extends Component {
     // currentPath = this.props.history.location.pathname
@@ -76,8 +79,11 @@ class CoursePageContainer extends Component {
                             <h1 style={{margin: 0}}>Assignments</h1>
                             {
                                 Object.keys(this.props.currentUser).length !== 0 && this.props.currentUser.position === "teacher" ?
-                                <Link to= {`${this.props.location.pathname}/assignments/new`}>
-                                    <i className="plus big square icon"></i>
+                                <Link style={{color: 'black'}} to= {`${this.props.location.pathname}/assignments/new`}>
+                                    
+                                    <span data-tooltip="Add New Assignment" data-position="bottom right">
+                                        <i className="plus big square icon"></i>
+                                    </span>
                                 </Link>
                                 :
                                 null
@@ -118,6 +124,12 @@ class CoursePageContainer extends Component {
                         {
                             this.props.course.announcements !== undefined ?
                             // null
+                            this.props.course.announcements.length === 0 ? 
+                            <div className="ui segment">
+                                <h2>No Announcements Yet!</h2>
+                            </div>
+                            
+                            :
                             this.props.course.announcements.map(announcement => {
                                 if (announcement.id === this.state.editAssignmentId){
                                     return <EditAnnouncementForm key={announcement.id} url={this.url[this.url.length-1]} handleEditClick={this.handleEditClick} announcement={announcement}/>

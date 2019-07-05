@@ -42,7 +42,7 @@ class NewProblemsComponent extends Component {
                         <div className="field">
                             <input onChange={this.handleOnChange} placeholder="Question" type="text" name="question"/>
                         </div>
-                        <input type="submit" value="Submit Assignment" className="ui submit button"></input>
+                        <input type="submit" value="Submit Question" className="ui green submit button"></input>
                         
                     </form>
                     {/* {problems.map(problem => {

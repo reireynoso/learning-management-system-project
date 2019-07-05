@@ -59,7 +59,7 @@ class SubmissionComponent extends Component {
                                 return <div className="ui segment" key={problem.id}>
                                     <h2>Question: {problem.question}</h2>
                                     
-                                    <textarea onChange={this.handleOnChange} name={`answer${problems.indexOf(problem) + 1}`} placeholder="Solution" rows="2"></textarea>
+                                    <textarea onChange={this.handleOnChange} required name={`answer${problems.indexOf(problem) + 1}`} placeholder="Solution" rows="2"></textarea>
                                 </div>
                             })}   
                         </div>

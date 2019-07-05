@@ -34,7 +34,9 @@ function reducer(state= defaultState, action){
             return {...state, currentAssignment: action.payload}
         case "UPDATE_SUBMISSION_IN_CURRENT_ASSIGNMENT":
                 const updateSubmissions = state.currentAssignment.submissions.map(submission => {
+                    // debugger
                     if(submission.id === action.payload.id){
+                        
                         submission = action.payload
                         return submission
                     }

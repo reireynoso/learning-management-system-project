@@ -61,8 +61,10 @@ function CourseCard(props) {
                     <br></br>
                     {
                         props.currentUser.position === 'teacher' ? 
+                        <span data-tooltip="Delete Course" data-position="bottom left">
+                            <i onClick={handleOnClick} className="big trash icon"></i>
+                        </span>
                          
-                         <i onClick={handleOnClick} className="big trash icon"></i>
                          :
                          <button onClick={handleStudentClick} className="ui red button">Drop Course</button>
                     }      

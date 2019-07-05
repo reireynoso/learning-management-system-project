@@ -46,8 +46,13 @@ class AnnouncementCard extends Component {
                 //checks if currentUser is defined and also if the user is a teacher
                 Object.keys(this.props.currentUser).length !== 0 && this.props.currentUser.position === "teacher" ? 
                 <Fragment>
-                    <i onClick={()=> this.handleOnClick(id)} className="trash big alternate outline icon"></i>
-                    <i onClick={()=> this.props.handleEditClick(id)} className="edit big outline icon"></i>
+                    <span data-tooltip="Delete Announcement" data-position="top left">
+                        <i onClick={()=> this.handleOnClick(id)} className="trash big alternate outline icon"></i>
+                    </span>
+                    <span data-tooltip="Edit Announcement" data-position="top left">
+                        <i onClick={()=> this.props.handleEditClick(id)} className="edit big outline icon"></i>
+                    </span>
+                    
                 </Fragment>   
                 :
                 null

@@ -15,7 +15,7 @@ class Api::V1::TeachersController < ApplicationController
             token = encode_token(payload)
             render json: {teacher: TeacherSerializer.new(@teacher), jwt: token}
         else
-            render json: { error: 'failed to create teacher' }, status: :not_acceptable
+            render json: {errors: @teacher.errors.full_messages}, status: :not_acceptable
         end
     end
 

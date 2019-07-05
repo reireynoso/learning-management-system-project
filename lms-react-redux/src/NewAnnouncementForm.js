@@ -54,7 +54,7 @@ class NewAnnouncementForm extends Component {
                      {/* <label>Information</label> */}
                      <textarea onChange={this.handleOnChange} name="information" placeholder="Information" rows="2" ></textarea>
                  </div>
-                <input type="submit" value="Post New Announcement" className="ui submit button"></input>
+                <input type="submit" value="Post New Announcement" className="ui submit green button"></input>
             </form>
         )
     }

@@ -17,6 +17,7 @@ function UserHomePage(props) {
                 <React.Fragment>
                     <Link to="/registerCourse">
                         <button className="ui blue button">Register for a Course</button>
+                        
                     </Link>
                     <h1>Classes You Are Enrolled In</h1>
                 </React.Fragment> 

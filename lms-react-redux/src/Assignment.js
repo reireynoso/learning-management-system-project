@@ -31,11 +31,11 @@ class Assignment extends Component {
     }
 
     render() {
-        console.log(this.props.assignment)
-        let found = this.props.assignment.submissions.find(submission => {
-            // debugger
-            return submission.student_id === this.props.currentUser.id
-        })
+        // console.log(this.props.assignment)
+        // let found = this.props.assignment.submissions.find(submission => {
+        //     // debugger
+        //     return submission.student_id === this.props.currentUser.id
+        // })
         // console.log(found)
     
         return (
@@ -48,10 +48,17 @@ class Assignment extends Component {
                 {
                     Object.keys(this.props.currentUser).length !== 0 && this.props.currentUser.position === "teacher" ?
                     <Fragment>
-                        <i onClick={() => this.handleOnClick(this.props.assignment.id)} className="trash big icon"></i> 
-                        <i onClick={()=> this.props.handleAssignmentClick(this.props.assignment)}className="edit big icon"></i>  
-                        <Link to={{pathname: `/courses/${this.props.assignment.course_id}/assignments/${this.props.assignment.id}/submissions`, assignmentObj: this.props.assignment}}>
-                            <i className="folder open outline big icon"></i>
+                        <span data-tooltip="Delete Assignment" data-position="top left">
+                            <i onClick={() => this.handleOnClick(this.props.assignment.id)} className="trash big icon"></i> 
+                        </span>
+                        
+                        <span data-tooltip="Add Questions to Assignment" data-position="top left">
+                            <i onClick={()=> this.props.handleAssignmentClick(this.props.assignment)}className="edit big icon"></i>   
+                        </span>
+                        <Link style={{color: 'black'}} to={{pathname: `/courses/${this.props.assignment.course_id}/assignments/${this.props.assignment.id}/submissions`, assignmentObj: this.props.assignment}}>
+                            <span data-tooltip="View Submissions" data-position="top left"> 
+                                <i className="folder open outline big icon"></i>
+                            </span>
                         </Link>
                         
                     </Fragment>
@@ -65,7 +72,7 @@ class Assignment extends Component {
                                  {this.checkIfSubmitted().created_at === this.checkIfSubmitted().updated_at ? 
                                     <h4>Grade Pending</h4> 
                                     :
-                                    <h4>Graded! Result: {this.checkIfSubmitted().grade_assigned}</h4>
+                                    <h4>Graded! Result: {this.checkIfSubmitted().grade_assigned}%</h4>
                                 }
                             </Fragment> 
                            

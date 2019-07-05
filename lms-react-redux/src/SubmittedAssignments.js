@@ -5,8 +5,11 @@ import GradingComponent from './GradingComponent'
 
 
 const containerStyle = {
-    border: "2px solid black"
+    border: "2px solid black",
+    borderRadius: "20px",
+    overflow: "hidden"
 }
+
 
 class SubmittedAssignments extends Component {
 
@@ -16,6 +19,7 @@ class SubmittedAssignments extends Component {
     }
 
     handleSubmitGrade = () => {
+        let percentage_grade =  (this.state.grade / (this.props.currentAssignment.problems.length * 10)) * 100 //each answer is worth 10 points max
         fetch(`http://localhost:3000/api/v1/submissions/${this.state.currentSubmissionView}`,{
             method: "PATCH",
             headers: {
@@ -23,12 +27,12 @@ class SubmittedAssignments extends Component {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                grade: this.state.grade
+                grade: percentage_grade
             })
         })
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
             this.setState({
                 currentSubmissionView: ''
             })
@@ -70,7 +74,7 @@ class SubmittedAssignments extends Component {
     render() {
         // console.log(this.props.location.pathname.split("/"))
         // console.log(this.props.currentAssignment)
-        console.log(this.state.grade)
+        // console.log(this.state.grade)
         return (
             <div className="ui grid container" style={{marginTop: "10px"}}>
                 <div className="six wide column">
@@ -80,40 +84,46 @@ class SubmittedAssignments extends Component {
                             
                         </div>
                         {
-                                Object.keys(this.props.currentAssignment).length !== 0 ?
+                                Object.keys(this.props.currentAssignment).length !== 0 && this.props.currentAssignment.submissions.length !== 0 ?
                                 this.props.currentAssignment.submissions.map(submission => {
                                     return <div key={submission.id} className="ui segment">
-                                        <h4>{submission.student.first_name}</h4>
+                                        <h4>From: {submission.student.first_name}</h4>
                                         
-                                        <button onClick={()=>{
+                                        <button className="ui yellow button" onClick={()=>{
                                             this.handleAssignmentClick(submission.id)
                                             }}>View</button>
                                         {
                                             submission.created_at !== submission.updated_at ?
-                                            <h4>Already Graded</h4>
+                                            <Fragment>
+                                                <h4>Grade Assigned: {submission.grade_assigned} %</h4>
+                                                {/* <h4>Percentage: {(submission.grade_assigned / (submission.answers.length * 10)) * 100} %</h4> */}
+                                            </Fragment>
+                    
                                             :
                                             null
                                         }
                                     </div>
                                 })
                                 :
-                                null
+                                <div className="ui segment">
+                                    <h1>No submissions yet!</h1>
+                                </div>
                             }
                     </div>
                 </div>
 
                 <div className="ten wide column">
                     <div style={containerStyle}>
-                        <h1>Assignment Grading View</h1>
+                        <h1>Select a Submission to View</h1> 
                         {
                             this.state.currentSubmissionView ?
                             <Fragment>
-                            <button onClick={this.handleSubmitGrade} className="ui button">Submit Grade</button>
+                            <button onClick={this.handleSubmitGrade} className="ui green button">Submit Grade</button>
                             {
                                 this.props.currentAssignment.submissions.map(submission => {
                                 if(submission.id === this.state.currentSubmissionView){
                                     return submission.answers.map(answer => {
-                                        return <GradingComponent key={answer.id} addTallyToGrade={this.addTallyToGrade}answer={answer} currentAssignment={this.props.currentAssignment} submission = {submission}/>
+                                        return <GradingComponent key={answer.id} addTallyToGrade={this.addTallyToGrade} answer={answer} currentAssignment={this.props.currentAssignment} submission = {submission}/>
                                                         
                                     })
                                     
@@ -123,11 +133,12 @@ class SubmittedAssignments extends Component {
                                 }    
                             })
                             }
-                            </Fragment>
-                            
-                            
+                            </Fragment> 
                             :
-                            <h1>Select a Submission to View</h1>                            
+                            <Fragment>
+                                 <iframe src="https://giphy.com/embed/xl3Biy7X0kRlzlQBx4" width="480" height="270" frameBorder="0" className="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/ramseysolutions-whatever-xl3Biy7X0kRlzlQBx4">via GIPHY</a></p>                          
+                            </Fragment>
+                           
                         }    
                         
                     </div>

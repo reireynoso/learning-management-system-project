@@ -20,10 +20,13 @@ function NavBar(props) {
                                     Object.keys(props.currentUser).length !== 0 ? //checking to see if object is empty
                                     <React.Fragment>
                                         <Link to={props.currentUser.position === "teacher" ? "/newCourseForm" : "/registerCourse"}>
-                                            <i className="big plus square outline icon"></i>
+                                            {/* <i className="big plus square outline icon"></i> */}
+                                            <span data-tooltip={props.currentUser.position === "teacher" ? "Add New Course" : "Register for New Course"} data-position="bottom left">
+                                                <i className="plus big square outline icon"></i>
+                                            </span>
                                         </Link>     
                                         <Link to="/home">
-                                            <div onClick={props.logOutUser} className="ui inverted button">Log Out</div>
+                                            <div onClick={props.logOutUser} className="ui inverted red button">Log Out</div>
                                         </Link>
                                     </React.Fragment>
                                     :

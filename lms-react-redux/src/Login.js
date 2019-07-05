@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import student from './noun_student_63368.svg'
+import teacher from './noun_Teacher_642198.svg'
 
 class Login extends Component {
     state = {
@@ -46,7 +48,6 @@ class Login extends Component {
                     this.props.changeUser(user.user)
                     this.props.history.push('/courses')
                 }
-                
             })
         }
         else{
@@ -60,25 +61,44 @@ class Login extends Component {
         return (
             <div className="ui container">
                 <div className="ui buttons">
+                        
                         <button onClick={() => this.handleOnClick('teacher')} className="ui button">Teacher</button>
                         <div className="or"></div>
                         <button onClick={() => this.handleOnClick('student')} className="ui button">Student</button>
                 </div>
+               
                 <br></br>
                 <br></br>
                 <form className="ui form" onSubmit={this.handleOnSubmit}>
                     <div className="field">
                         <label>Username</label>
-                        <input type="text" name="username" onChange={this.handleOnChange} value={this.state.username} placeholder="User Name"/>
+                        <input type="text" name="username" required onChange={this.handleOnChange} value={this.state.username} placeholder="User Name"/>
                     </div>
 
                     <div className="field">
                         <label>Password</label>
-                        <input type="password" name="password" onChange={this.handleOnChange} value={this.state.password} placeholder=" Password"/>
+                        <input type="password" name="password" required onChange={this.handleOnChange} value={this.state.password} placeholder=" Password"/>
                     </div>
 
                     <button className="ui button" type="submit">Login</button>
-                </form>  
+                </form>
+                <br></br>
+                <br></br>
+
+                {this.state.position ?
+                    <div className="ui segment" style={{width: "100px", height: "100px", margin: "auto"}}>
+                        {
+                        this.state.position === "teacher" ?
+                            <img src={teacher}></img>
+                            :
+                            <img src={student}></img>
+                        }
+                    </div> 
+                    
+                    : 
+                    null
+                }  
+
                 {this.props.errorState.errors ? 
                 <div className="ui error message">
                 <div className="header">
