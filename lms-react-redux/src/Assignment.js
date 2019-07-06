@@ -48,6 +48,23 @@ class Assignment extends Component {
         return today 
     }
 
+    checkGradeColor = (grade) => {
+        // adjust color of grade notification
+        // debugger
+        if(grade > 89 && grade <= 100){
+            return {color: "green"}
+        }
+        else if (grade > 79 && grade <= 89){
+            return {color: "blue"}
+        }
+        else if (grade > 69 && grade <= 79){
+            return {color: "gold"}
+        }
+        else{
+            return {color: "red"}
+        }
+    }
+
     render() {
         // console.log(this.props.assignment)
         // let found = this.props.assignment.submissions.find(submission => {
@@ -61,7 +78,7 @@ class Assignment extends Component {
                 <h3>{this.props.assignment.name}</h3>
                 <h4>{this.props.assignment.note}</h4>
                 {/* checks if assignment is late, displaying the text as red */}
-                <h4 style={this.props.assignment.due_date < this.dateToday() ? lateStyle : null}>Due: <Moment format="MM/DD/YYYY">{this.props.assignment.due_date}</Moment></h4>
+                <h4>Due: <Moment style={this.props.assignment.due_date < this.dateToday() ? lateStyle : null} format="MM/DD/YYYY">{this.props.assignment.due_date}</Moment></h4>
                 {/* <h1><Moment format="MM/DD/YYYY">{Date.now()}</Moment></h1>  */}
                 {/* <h4>Due {<Moment fromNow>{this.props.assignment.due_date}</Moment>}</h4> */}
                 {
@@ -91,7 +108,7 @@ class Assignment extends Component {
                                  {this.checkIfSubmitted().created_at === this.checkIfSubmitted().updated_at ? 
                                     <h4>Grade Pending</h4> 
                                     :
-                                    <h4>Graded! Result: {this.checkIfSubmitted().grade_assigned}%</h4>
+                                    <h4>Graded! Result: <span style={this.checkGradeColor(this.checkIfSubmitted().grade_assigned)}>{this.checkIfSubmitted().grade_assigned}</span>%</h4>
                                 }
                             </Fragment> 
                            

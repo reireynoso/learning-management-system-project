@@ -24,25 +24,23 @@ class Api::V1::StudentsController < ApplicationController
         render json: @student
     end
 
-    # def student_grades 
-    #     @grades_by_subject = []
-    #     @math_grades = []
-    #     @grades_by_subject << @math_grades
-    # #     @literature_grades = [],
-    #     #   @science_grades = [],
-    #     #   @history_grades = [],
-    #     #   @technology_grades = []
-    #     @student = Student.find(params[:id])
-    #     byebug
-    #     @student.submissions.map |submission| do 
-    #         if submission.created_at != submission.updated_at
-    #             if submission.assignment.course.subject == "Math"
-    #                 @math_grades << submission.grade_assigned
-    #             end
-    #         end
-    #     end
-    #     render json: @grades_by_subject   
-    # end
+    def student_grades 
+        # @grades = []
+        @grades_by_subject = {grades: []}
+        @student = Student.find(params[:id])
+        # byebug
+        @student.submissions.map do |submission|  
+            # byebug
+            if submission.created_at != submission.updated_at
+                # if submission.assignment.course.subject.name == "Math"
+                    # byebug
+                    @grades_by_subject[:grades] << {grade_assigned: submission.grade_assigned, subject: submission.assignment.course.subject.name}
+                # end
+            end
+        end
+        # byebug
+        render json: @grades_by_subject  
+    end
 
     private
 

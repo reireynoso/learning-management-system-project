@@ -100,6 +100,21 @@ class SignUp extends Component {
                 </div>
                 <br></br>
                 <br></br>
+                {this.state.position ?
+                    <div className="ui segment" style={{width: "100px", height: "100px", margin: "auto"}}>
+                        {
+                        this.state.position === "teacher" ?
+                            <img src={teacher}></img>
+                            :
+                            <img src={student}></img>
+                        }
+                    </div> 
+                    
+                    : 
+                    null
+                }
+                <br></br>
+                <br></br>
                 <form className="ui form" onSubmit={this.handleOnSubmit}>
                     <div className="field">
                         <label>Username</label>
@@ -136,19 +151,7 @@ class SignUp extends Component {
                 </form>      
                 <br></br>
                 <br></br>
-                {this.state.position ?
-                    <div className="ui segment" style={{width: "100px", height: "100px", margin: "auto"}}>
-                        {
-                        this.state.position === "teacher" ?
-                            <img src={teacher}></img>
-                            :
-                            <img src={student}></img>
-                        }
-                    </div> 
-                    
-                    : 
-                    null
-                }
+                
                 {
                     this.state.errors.length !== 0 ? 
 

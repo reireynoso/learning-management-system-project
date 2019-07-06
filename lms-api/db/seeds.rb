@@ -12,6 +12,11 @@ Course.destroy_all
 Student.destroy_all
 Enrollment.destroy_all
 Assignment.destroy_all
+Submission.destroy_all
+Answer.destroy_all
+Announcement.destroy_all
+Problem.destroy_all
+Comment.destroy_all
 
 puts 'seeding'
 

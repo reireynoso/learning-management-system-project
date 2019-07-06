@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post "/login", to: "auth#login"
       get "/auto_login", to: "auth#auto_login"
+      get "students/:id/student_grades", to: "students#student_grades"
       resources :teachers, only: [:index, :create, :show] do
         resources :courses, only: [:index, :create, :destroy] do
           resources :announcements, only: [:index]

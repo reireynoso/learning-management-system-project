@@ -69,6 +69,23 @@ class Login extends Component {
                
                 <br></br>
                 <br></br>
+
+                {this.state.position ?
+                    <div className="ui segment" style={{width: "100px", height: "100px", margin: "auto"}}>
+                        {
+                        this.state.position === "teacher" ?
+                            <img src={teacher}></img>
+                            :
+                            <img src={student}></img>
+                        }
+                    </div> 
+                    
+                    : 
+                    null
+                }  
+
+                <br></br>
+                <br></br>
                 <form className="ui form" onSubmit={this.handleOnSubmit}>
                     <div className="field">
                         <label>Username</label>
@@ -84,20 +101,6 @@ class Login extends Component {
                 </form>
                 <br></br>
                 <br></br>
-
-                {this.state.position ?
-                    <div className="ui segment" style={{width: "100px", height: "100px", margin: "auto"}}>
-                        {
-                        this.state.position === "teacher" ?
-                            <img src={teacher}></img>
-                            :
-                            <img src={student}></img>
-                        }
-                    </div> 
-                    
-                    : 
-                    null
-                }  
 
                 {this.props.errorState.errors ? 
                 <div className="ui error message">
