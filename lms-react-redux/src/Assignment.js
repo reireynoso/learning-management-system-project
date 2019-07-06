@@ -3,7 +3,9 @@ import {connect} from 'react-redux'
 import Moment from 'react-moment'
 import {Link} from 'react-router-dom'
 
-
+const lateStyle = {
+    color: "red"
+}
 class Assignment extends Component {
     
     handleOnClick = (id) => {
@@ -30,6 +32,22 @@ class Assignment extends Component {
         return found
     }
 
+    dateToday = () => {
+        let today = new Date();
+        let dd = today.getDate();
+        let mm = today.getMonth() + 1;
+        let yyyy = today.getFullYear();
+        if(dd<10){
+            dd='0'+dd
+        } 
+        if(mm<10){
+            mm='0'+mm
+        } 
+        today = yyyy + '-' + mm + '-' + dd
+        
+        return today 
+    }
+
     render() {
         // console.log(this.props.assignment)
         // let found = this.props.assignment.submissions.find(submission => {
@@ -42,7 +60,8 @@ class Assignment extends Component {
             <div className="ui segment">
                 <h3>{this.props.assignment.name}</h3>
                 <h4>{this.props.assignment.note}</h4>
-                <h4>Due: <Moment format="MM/DD/YYYY">{this.props.assignment.due_date}</Moment></h4>
+                {/* checks if assignment is late, displaying the text as red */}
+                <h4 style={this.props.assignment.due_date < this.dateToday() ? lateStyle : null}>Due: <Moment format="MM/DD/YYYY">{this.props.assignment.due_date}</Moment></h4>
                 {/* <h1><Moment format="MM/DD/YYYY">{Date.now()}</Moment></h1>  */}
                 {/* <h4>Due {<Moment fromNow>{this.props.assignment.due_date}</Moment>}</h4> */}
                 {

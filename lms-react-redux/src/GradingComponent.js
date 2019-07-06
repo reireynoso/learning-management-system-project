@@ -76,7 +76,7 @@ export default class GradingComponent extends Component {
                     <option value="10">10</option>
                 </select>
                 {/* <input onClick={this.handleAssignPointClick} value="Assign Points" className="ui submit button"></input> */}
-                <button onClick={this.handleAssignPointClick} className="ui button">Assign Points</button>
+                <button onClick={this.handleAssignPointClick} className="ui teal button">Assign Points</button>
          
             </div>
            

@@ -124,11 +124,23 @@ class SubmittedAssignments extends Component {
                             {
                                 this.props.currentAssignment.submissions.map(submission => {
                                 if(submission.id === this.state.currentSubmissionView){
-                                    return submission.answers.map(answer => {
-                                        return <GradingComponent key={answer.id} addTallyToGrade={this.addTallyToGrade} answer={answer} currentAssignment={this.props.currentAssignment} submission = {submission}/>
-                                                        
-                                    })
-                                    
+                                   return <Fragment key={submission.id}>
+                                       {/* <h1>{submission.assignment.due_date}</h1> */}
+                                       {/* <h1>{submission.created_at}</h1> */}
+                                       {
+                                           submission.assignment.due_date < submission.created_at ?
+                                           <h4 style={{color: "red"}}>ALERT: Late Submission</h4>
+                                           :
+                                        //    <h1>Not late</h1>
+                                            null
+                                       }
+                                        {
+                                            submission.answers.map(answer => {
+                                                return <GradingComponent key={answer.id} addTallyToGrade={this.addTallyToGrade} answer={answer} currentAssignment={this.props.currentAssignment} submission = {submission}/>
+                                                                
+                                            })
+                                        }
+                                    </Fragment>
                                 }
                                 else{
                                     return null

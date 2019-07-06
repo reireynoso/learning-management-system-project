@@ -35,7 +35,7 @@ class SubmissionComponent extends Component {
                 
             //  console.log(data)  
             //  this.props.setSubmission(data)
-            console.log(data)
+            // console.log(data)
             this.props.history.push('/courses')
             
             })

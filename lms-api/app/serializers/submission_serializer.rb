@@ -7,7 +7,8 @@ class SubmissionSerializer < ActiveModel::Serializer
   def assignment 
     {
       name: self.object.assignment.name,
-      id: self.object.assignment.id
+      id: self.object.assignment.id,
+      due_date: self.object.assignment.due_date
     }
   end
 

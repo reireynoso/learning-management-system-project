@@ -45,11 +45,29 @@ class NewAssignmentForm extends Component {
             [e.target.name]: e.target.value
         })
     }
+
+    dateToday = () => {
+        let today = new Date();
+        let dd = today.getDate();
+        let mm = today.getMonth() + 1;
+        let yyyy = today.getFullYear();
+        if(dd<10){
+            dd='0'+dd
+        } 
+        if(mm<10){
+            mm='0'+mm
+        } 
+        today = yyyy + '-' + mm + '-' + dd
+        
+        return today 
+    }
     render() {
         // console.log(this.props.history.location)
         // let currentCourse = this.props.history.location.pathname.split("/")[2]; //grabs current course id based on path name. ORDER of path is important
         // console.log(currentCourse)
         // console.log(this.state.course_id)
+        // console.log(this.state.due_date)
+        // console.log(this.dateToday())
         // console.log(this.state.due_date)
         return (
             <div className="ui container" style={newCourseFormStyle}>
@@ -64,7 +82,7 @@ class NewAssignmentForm extends Component {
                     <input onChange={this.handleOnChange} required style={{width: "80%"}} type="text" name="note" placeholder="Note"/>
 
                     <label>Due Date</label>
-                    <input onChange={this.handleOnChange} required style={{width: "80%"}} type="date" name="due_date" placeholder="Date"/>
+                    <input onChange={this.handleOnChange} required style={{width: "80%"}} type="date" min={this.dateToday()} name="due_date" placeholder="Date"/>
                     
                     <br></br>
 

@@ -24,6 +24,28 @@ class Api::V1::StudentsController < ApplicationController
         render json: @student
     end
 
+    # def student_grades 
+    #     @grades_by_subject = []
+    #     @math_grades = []
+    #     @grades_by_subject << @math_grades
+    # #     @literature_grades = [],
+    #     #   @science_grades = [],
+    #     #   @history_grades = [],
+    #     #   @technology_grades = []
+    #     @student = Student.find(params[:id])
+    #     byebug
+    #     @student.submissions.map |submission| do 
+    #         if submission.created_at != submission.updated_at
+    #             if submission.assignment.course.subject == "Math"
+    #                 @math_grades << submission.grade_assigned
+    #             end
+    #         end
+    #     end
+    #     render json: @grades_by_subject   
+    # end
+
+    private
+
     def student_params
         params.require(:user).permit(:username, :password, :first_name, :last_name, :bio, :image_url,:position)
     end
