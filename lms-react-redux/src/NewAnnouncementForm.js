@@ -34,7 +34,7 @@ class NewAnnouncementForm extends Component {
             // console.log(data)
             this.props.addAnnnouncement(data)
         })
-        
+        e.target.reset()
     }
     render() {
         // console.log(this.props)
@@ -43,7 +43,7 @@ class NewAnnouncementForm extends Component {
                 <div className="two fields">
                     <div className="field">
                     {/* <label>First Name</label> */}
-                    <input onChange={this.handleOnChange} placeholder="Title" type="text" name="title"/>
+                    <input onChange={this.handleOnChange} required placeholder="Title" type="text" name="title"/>
                     </div>
                     <div className="field">
                     {/* <label>Last Name</label> */}
@@ -52,7 +52,7 @@ class NewAnnouncementForm extends Component {
                 </div>
                 <div className="field">
                      {/* <label>Information</label> */}
-                     <textarea onChange={this.handleOnChange} name="information" placeholder="Information" rows="2" ></textarea>
+                     <textarea onChange={this.handleOnChange} required name="information" placeholder="Information" rows="2" ></textarea>
                  </div>
                 <input type="submit" value="Post New Announcement" className="ui submit green button"></input>
             </form>

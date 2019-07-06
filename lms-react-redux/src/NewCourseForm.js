@@ -13,7 +13,8 @@ class NewCourseForm extends Component {
     state={
         name: '',
         teacher_id: '',
-        subject_id: ''
+        subject_id: '',
+        errors: ''
     }
 
     handleOnChange = (e) => {
@@ -26,6 +27,9 @@ class NewCourseForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         // console.log(this.state)
+        if(this.state.subject_id){
+
+        
         fetch(`http://localhost:3000/api/v1/teachers/${this.state.teacher_id}/courses`,{
             method: "POST",
             headers: {
@@ -33,7 +37,11 @@ class NewCourseForm extends Component {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                course: this.state
+                course: {
+                    name: this.state.name,
+                    teacher_id: this.state.teacher_id,
+                    subject_id: this.state.subject_id,
+                }
             })
         })
         .then(resp => resp.json())
@@ -44,6 +52,18 @@ class NewCourseForm extends Component {
             // this.props.setUserCourses(data)
             this.props.history.push('/courses')
         })
+        }
+        else{
+            this.setState({
+                errors: 'Subject Selection Required'
+            })
+
+            window.setTimeout(() => {
+                this.setState({
+                  errors: ''
+                });
+              }, 2000);
+        }
     }
     render() {
         // console.log(this.props.currentUser.id)
@@ -55,7 +75,7 @@ class NewCourseForm extends Component {
                 <form className="ui form" onSubmit={this.handleSubmit}>
                     <div className="field">
                         <label>Course Name</label>
-                        <input onChange={this.handleOnChange} style={{width: "80%"}} type="text" name="name" placeholder="Course Name"/>
+                        <input onChange={this.handleOnChange} style={{width: "80%"}} required type="text" name="name" placeholder="Course Name"/>
                         
                         <br></br>
 
@@ -72,6 +92,20 @@ class NewCourseForm extends Component {
                         <button className="ui button" type="submit">Submit</button>
                     </div>
                 </form>
+                {
+                    this.state.errors ? 
+                    <div className="ui error message">
+                        <div className="header">
+                            Errors with your submission
+                        </div>
+                        <ul className="list">
+                            <li>{this.state.errors}</li>
+                        </ul>
+                    </div>
+                    :
+                    null
+                }
+                
             </div>
         )
     }

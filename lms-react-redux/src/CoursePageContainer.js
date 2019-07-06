@@ -135,6 +135,7 @@ class CoursePageContainer extends Component {
                                     return <EditAnnouncementForm key={announcement.id} url={this.url[this.url.length-1]} handleEditClick={this.handleEditClick} announcement={announcement}/>
                                 }
                                 else{
+                                    //add comment render here. similar approach to edit announcement form
                                     return <AnnouncementCard handleEditClick={this.handleEditClick} key={announcement.id} url={this.url[this.url.length-1]} announcement={announcement}/>
                                 }
                                 // return <AnnouncementCard key={announcement.id} url={this.url[this.url.length-1]} announcement={announcement}/>

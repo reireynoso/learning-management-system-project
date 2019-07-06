@@ -3,6 +3,12 @@ import {connect} from 'react-redux'
 import React, { Component, Fragment } from 'react'
 
 class AnnouncementCard extends Component {
+
+    state={
+        showComments: false,
+        allComments: [],
+        comment: ''
+    }
     handleOnClick = (id) =>{
         // console.log(id)
         fetch(`http://localhost:3000/api/v1/courses/${this.props.url}/announcements/${id}`,{
@@ -20,6 +26,7 @@ class AnnouncementCard extends Component {
         if(splitString.includes('embed')){
             return true
         }
+
     }
     embedIt = (videoId) => {
         let splitString = videoId.split("=")
@@ -27,8 +34,89 @@ class AnnouncementCard extends Component {
         return `https://www.youtube.com/embed/${splitString[1]}`
     }
 
-    
+    handleCommentChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    handleCommentDelete = (commentId) => {
+        // let deletedComment = this.state.allComments.filter(comment => {
+        //     return comment.id !== commentId
+        // })
+        // this.setState({
+        //     allComments: deletedComment
+        // })
+        fetch(`http://localhost:3000/api/v1/courses/${this.props.url}/announcements/${this.props.announcement.id}/comments/${commentId}`,{
+            method: "DELETE"
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            let deletedComment = this.state.allComments.filter(comment => {
+                return comment.id !== commentId
+            })
+            this.setState({
+                allComments: deletedComment
+            })
+        })
+    }
+
+    handleCommentSubmit = (e) => {
+        e.preventDefault()
+        fetch(`http://localhost:3000/api/v1/courses/${this.props.url}/announcements/${this.props.announcement.id}/comments`,{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    comment: {
+                        content: this.state.comment,
+                        announcement_id: this.props.announcement.id,
+                        commentable: {
+                            position: this.props.currentUser.position,
+                            id: this.props.currentUser.id
+
+                    }
+                }})
+            })
+            .then(resp => resp.json())
+            .then(data => {
+                this.setState({
+                    allComments: [...this.state.allComments, data]
+                })
+            })
+            e.target.reset()
+    }
+
+    handleViewCommentsClick = (id) => {
+        //only makes a fetch when viewComment is opened
+        if(this.state.showComments){
+            this.setState({
+                showComments: false,
+                allComments: []
+            })
+        }
+        else{
+            fetch(`http://localhost:3000/api/v1/courses/${this.props.url}/announcements/${id}/comments`)
+            .then(resp => resp.json())
+            .then(data => {
+                // console.log(data)
+                //return ALL comments. filters which comments belong to the specific announcement clicked
+                let specificAnnouncementComments = data.filter(comment => {
+                    return comment.announcement.id === id 
+                })
+                this.setState({
+                    showComments: true,
+                    allComments: specificAnnouncementComments
+                })
+            })
+        }
+        
+    }
+
     render() {
+        // console.log(this.state.allComments)
         const {id, title, information, video_url} = this.props.announcement
         return (
         <div className="ui segment">
@@ -52,13 +140,59 @@ class AnnouncementCard extends Component {
                     <span data-tooltip="Edit Announcement" data-position="top left">
                         <i onClick={()=> this.props.handleEditClick(id)} className="edit big outline icon"></i>
                     </span>
+
+                    <span data-tooltip="View Comments" data-position="top left">
+                        <i onClick={() => this.handleViewCommentsClick(id)} className="eye big icon"></i>
+                    </span>
+                    
                     
                 </Fragment>   
                 :
+                <span data-tooltip="View Comments" data-position="top left">
+                        <i onClick={() => this.handleViewCommentsClick(id)} className="eye big icon"></i>
+                </span>
+            }
+            {
+                this.state.showComments ?
+
+                <Fragment>
+                    <form onSubmit={this.handleCommentSubmit} className="ui form">
+                        <div className="field">
+                            <br></br>
+                            {/* <label>Post Comment</label> */}
+                            <textarea name="comment" placeholder="Share your comments or thoughts! Keep it friendly!" onChange={this.handleCommentChange} rows="2"></textarea>
+                        </div>
+                        <button className="ui blue button" type="submit" value="Submit">Comment</button>
+                    </form>
+                    {   
+                        this.state.allComments.length !== 0?
+                        this.state.allComments.map(comment =>{
+                            return <div key={comment.id} className="ui segment">
+                                <h4>Comment: {comment.content}</h4>
+                                <p>By: {comment.commentable.username} | {comment.commentable.position}</p>
+                                {
+                                    comment.commentable.id === this.props.currentUser.id ?
+                                    <span data-tooltip="Remove Comment" data-position="top left">
+                                        <i onClick={()=> this.handleCommentDelete(comment.id)} className="hand big scissors icon"></i>
+                                    </span>
+                                    :
+                                    null
+                                }
+                                
+                            </div>
+                        })
+                        :
+                        <div className="ui segment">
+                            <h2>No Comments...yet</h2>
+                        </div>
+                        
+                    }
+                </Fragment>
+                
+                :
                 null
             }
-            {/* <i onClick={()=> this.handleOnClick(id)} className="trash big alternate outline icon"></i>
-            <i onClick={()=> this.props.handleEditClick(id)} className="edit big outline icon"></i> */}
+            
             </div>
             
         </div>

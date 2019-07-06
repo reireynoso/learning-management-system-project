@@ -58,13 +58,13 @@ class NewAssignmentForm extends Component {
             <form className="ui form" onSubmit={this.handleSubmit}>
                 <div className="field">
                     <label>Assignment Name</label>
-                    <input onChange={this.handleOnChange} style={{width: "80%"}} type="text" name="name" placeholder="Name"/>
+                    <input onChange={this.handleOnChange} required style={{width: "80%"}} type="text" name="name" placeholder="Name"/>
                     
                     <label>Note</label>
-                    <input onChange={this.handleOnChange} style={{width: "80%"}} type="text" name="note" placeholder="Note"/>
+                    <input onChange={this.handleOnChange} required style={{width: "80%"}} type="text" name="note" placeholder="Note"/>
 
                     <label>Due Date</label>
-                    <input onChange={this.handleOnChange} style={{width: "80%"}} type="date" name="due_date" placeholder="Date"/>
+                    <input onChange={this.handleOnChange} required style={{width: "80%"}} type="date" name="due_date" placeholder="Date"/>
                     
                     <br></br>
 

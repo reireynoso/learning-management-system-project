@@ -5,4 +5,5 @@ class Course < ApplicationRecord
     has_many :enrollments, :dependent => :delete_all
     has_many :assignments, :dependent => :delete_all
     has_many :submissions, through: :assignments
+
 end

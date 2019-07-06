@@ -13,7 +13,9 @@ Rails.application.routes.draw do
       end
       resources :subjects, only: [:index,:show]
       resources :courses, only: [:index,:show] do 
-        resources :announcements, only: [:create, :destroy,:update]
+        resources :announcements, only: [:create, :destroy,:update] do 
+          resources :comments, only: [:index, :show, :create, :destroy]
+        end
         resources  :assignments, only: [:index, :create, :show, :destroy] do 
           resources :problems, only: [:index, :show, :create, :destroy] 
           # resources :submissions, only: [:index, :show, :update] 
@@ -21,6 +23,7 @@ Rails.application.routes.draw do
       end
       resources :submissions, only: [:index, :create, :show, :update]
       resources :answers, only: [:index,:show,:update]
+      # resources :comments, only: [:index]
     end
   end
 end

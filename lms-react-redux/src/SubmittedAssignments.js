@@ -33,10 +33,12 @@ class SubmittedAssignments extends Component {
         .then(resp => resp.json())
         .then(data => {
             // console.log(data)
-            this.setState({
-                currentSubmissionView: ''
-            })
             this.props.updateSubmission(data)
+            this.setState({
+                currentSubmissionView: '',
+                grade: 0
+            })
+            
         })
     }
 

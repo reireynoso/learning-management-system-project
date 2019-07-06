@@ -78,7 +78,10 @@ class Assignment extends Component {
                            
                             
                             :
+                            this.props.assignment.problems.length !== 0 ?
                             <button onClick={() => this.props.handleAssignmentClick(this.props.assignment)} className="ui teal button">Start</button>
+                            :
+                            <button className="ui teal disabled button">No Problems Assigned</button>
                         }
                     </Fragment>
                     // <button onClick={() => this.props.handleAssignmentClick(this.props.assignment)} className="ui teal button">Start</button>

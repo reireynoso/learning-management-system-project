@@ -32,6 +32,7 @@ class NewProblemsComponent extends Component {
             // console.log(data)
             this.props.addProblemToAssignment(data, this.props.assignmentObject.id)
         })
+        e.target.reset()
     }
     render() {
         // console.log(this.props.currentCourse.assignments)
@@ -40,7 +41,7 @@ class NewProblemsComponent extends Component {
             <div>
                 <form onSubmit={this.handleOnSubmit} className="ui tiny form">
                         <div className="field">
-                            <input onChange={this.handleOnChange} placeholder="Question" type="text" name="question"/>
+                            <input onChange={this.handleOnChange} required placeholder="Question" type="text" name="question"/>
                         </div>
                         <input type="submit" value="Submit Question" className="ui green submit button"></input>
                         
