@@ -25,6 +25,38 @@ class Api::V1::TeachersController < ApplicationController
         render json: @teacher
     end
 
+    def teacher_grades
+        @teacher = Teacher.find(params[:id])
+        @teacher_courses = Course.all.where(teacher_id: @teacher.id)
+        @teacher_course_with_grades = []
+        @teacher_courses.each do |course|
+            teacher_course = {name: course.name, grades: []}  
+            course.submissions.filter do |submission|
+                if submission.created_at != submission.updated_at
+                    teacher_course[:grades] << submission.grade_assigned
+                end
+            end
+            @teacher_course_with_grades << teacher_course
+        end
+        # byebug
+        @teacher_course_with_grades.collect do |course|
+            course_total = 0
+            course[:grades].collect do |grade|
+                course_total += grade
+            end
+            if course[:grades].length == 0
+                course[:grades] = 0
+            else
+                course[:grades] = course_total / course[:grades].length
+            end
+            
+        end
+        # byebug
+        render json: @teacher_course_with_grades
+    end
+
+    private
+
     def teacher_params
         params.require(:user).permit(:username, :password, :first_name, :last_name, :bio, :image_url,:position)
     end

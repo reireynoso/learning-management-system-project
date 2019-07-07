@@ -94,9 +94,14 @@ class CoursePageContainer extends Component {
                         {
                             this.props.course.assignments !== undefined ?
                             // null
-                            this.props.course.assignments.map(assignment => {
-                                    return <Assignment handleProblemClick={this.handleProblemClick} handleAssignmentClick={this.handleAssignmentClick} handleEditClick={this.handleEditClick} key={assignment.id} url={this.url[this.url.length-1]} assignment={assignment}/>
-                            })
+                            this.props.course.assignments.length === 0 ? 
+                                <div className="ui segment">
+                                    <h2>No Assignments Yet!</h2>
+                                </div>
+                                :
+                                this.props.course.assignments.map(assignment => {
+                                        return <Assignment handleProblemClick={this.handleProblemClick} handleAssignmentClick={this.handleAssignmentClick} handleEditClick={this.handleEditClick} key={assignment.id} url={this.url[this.url.length-1]} assignment={assignment}/>
+                                })
                             :
                             null
                         }

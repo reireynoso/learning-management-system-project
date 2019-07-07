@@ -24,7 +24,11 @@ function NavBar(props) {
                                             <span data-tooltip={props.currentUser.position === "teacher" ? "Add New Course" : "Register for New Course"} data-position="bottom left">
                                                 <i className="plus big square outline icon"></i>
                                             </span>
-                                        </Link>     
+                                        </Link>
+                                        <Link to={props.currentUser.position === "teacher" ? `/profile/teacher/${props.currentUser.id}` : `/profile/student/${props.currentUser.id}`}>
+                                            <div className="ui inverted secondary basic button">Profile</div>
+                                        </Link>
+                                            
                                         <Link to="/home">
                                             <div onClick={props.logOutUser} className="ui inverted red button">Log Out</div>
                                         </Link>

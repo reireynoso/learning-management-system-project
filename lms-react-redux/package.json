@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "chart.js": "^2.8.0",
     "i": "^0.3.6",
     "moment": "^2.24.0",
     "npm": "^6.9.2",
     "react": "^16.8.6",
+    "react-chartjs-2": "^2.7.6",
     "react-dom": "^16.8.6",
     "react-moment": "^0.9.2",
     "react-pure-lifecycle": "^3.0.0",

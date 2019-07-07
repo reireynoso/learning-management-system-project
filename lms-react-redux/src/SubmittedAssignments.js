@@ -145,7 +145,7 @@ class SubmittedAssignments extends Component {
                                        {/* <h1>{submission.assignment.due_date}</h1> */}
                                        {/* <h1>{submission.created_at}</h1> */}
                                        {
-                                           submission.assignment.due_date < submission.created_at ?
+                                           submission.assignment.due_date > submission.created_at ?
                                            <h4 style={{color: "red"}}>ALERT: Late Submission</h4>
                                            :
                                         //    <h1>Not late</h1>

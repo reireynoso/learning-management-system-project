@@ -13,6 +13,7 @@ import NewCourseForm from './NewCourseForm'
 import RegisterCourseComponent from './RegisterCourseComponent'
 import NewAssignmentForm from './NewAssignmentForm'
 import SubmittedAssignments from './SubmittedAssignments';
+import ProfileComponent from './ProfileComponent';
 
 class App extends Component {
 
@@ -64,13 +65,11 @@ class App extends Component {
     })
     
   }
-    
-    
   render() {
     // debugger
     return (
       <div className="App">
-        <NavBar/>
+        <NavBar/>  
         {/* {
           Object.keys(this.props.currentUser).length !== 0 ?  */}
           <Switch>
@@ -79,6 +78,8 @@ class App extends Component {
           <Route path='/signUp' component={SignUp} /> 
 
           <Route path="/home" component={LandingPage}/>
+          <Route path="/profile/student/:id" component={ProfileComponent}/>
+          <Route path="/profile/teacher/:id" component={ProfileComponent}/>
           <Route path='/newCourseForm' component={NewCourseForm}/>
           <Route path='/courses/:id/assignments/:id/submissions' component={SubmittedAssignments}/> >
           <Route path='/registerCourse' component={RegisterCourseComponent}/>

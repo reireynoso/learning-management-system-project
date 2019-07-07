@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       post "/login", to: "auth#login"
       get "/auto_login", to: "auth#auto_login"
       get "students/:id/student_grades", to: "students#student_grades"
+      get "teachers/:id/teacher_grades", to: "teachers#teacher_grades"
       resources :teachers, only: [:index, :create, :show] do
         resources :courses, only: [:index, :create, :destroy] do
           resources :announcements, only: [:index]
