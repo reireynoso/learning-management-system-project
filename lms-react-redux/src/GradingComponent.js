@@ -20,7 +20,7 @@ export default class GradingComponent extends Component {
             })
             .then(resp => resp.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 this.props.addTallyToGrade(data.points_assigned)
             })
         }

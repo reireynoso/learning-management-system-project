@@ -26,6 +26,7 @@ class Api::V1::TeachersController < ApplicationController
     end
 
     def teacher_grades
+        # byebug
         @teacher = Teacher.find(params[:id])
         @teacher_courses = Course.all.where(teacher_id: @teacher.id)
         @teacher_course_with_grades = []

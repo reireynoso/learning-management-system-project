@@ -73,22 +73,22 @@ class SubmittedAssignments extends Component {
         } 
     }
 
-    checkGradeColor = (grade) => {
-        // adjust color of grade notification
-        // debugger
-        if(grade > 89 && grade <= 100){
-            return {color: "green"}
-        }
-        else if (grade > 79 && grade <= 89){
-            return {color: "blue"}
-        }
-        else if (grade > 69 && grade <= 79){
-            return {color: "gold"}
-        }
-        else{
-            return {color: "red"}
-        }
-    }
+    // checkGradeColor = (grade) => {
+    //     // adjust color of grade notification
+    //     // debugger
+    //     if(grade > 89 && grade <= 100){
+    //         return {color: "green"}
+    //     }
+    //     else if (grade > 79 && grade <= 89){
+    //         return {color: "blue"}
+    //     }
+    //     else if (grade > 69 && grade <= 79){
+    //         return {color: "gold"}
+    //     }
+    //     else{
+    //         return {color: "red"}
+    //     }
+    // }
     
     render() {
         // console.log(this.props.location.pathname.split("/"))
@@ -114,7 +114,13 @@ class SubmittedAssignments extends Component {
                                         {
                                             submission.created_at !== submission.updated_at ?
                                             <Fragment>
-                                                <h4>Grade Assigned: <span style={this.checkGradeColor(submission.grade_assigned)}>{submission.grade_assigned}</span> %</h4>
+                                                <h4>Grade Assigned: </h4>
+                                                    {/* <span style={this.checkGradeColor(submission.grade_assigned)}>{submission.grade_assigned}</span> %</h4> */}
+                                                <div className="ui indicating progress stats" data-percent={submission.grade_assigned} >
+                                                    <div className="bar" style={{width: `${submission.grade_assigned}%`}}>
+                                                        <div className="progress">{submission.grade_assigned}%</div>
+                                                    </div>
+                                                </div>
                                                 {/* <h4>Percentage: {(submission.grade_assigned / (submission.answers.length * 10)) * 100} %</h4> */}
                                             </Fragment>
                     

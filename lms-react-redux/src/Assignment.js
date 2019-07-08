@@ -48,22 +48,22 @@ class Assignment extends Component {
         return today 
     }
 
-    checkGradeColor = (grade) => {
-        // adjust color of grade notification
-        // debugger
-        if(grade > 89 && grade <= 100){
-            return {color: "green"}
-        }
-        else if (grade > 79 && grade <= 89){
-            return {color: "blue"}
-        }
-        else if (grade > 69 && grade <= 79){
-            return {color: "gold"}
-        }
-        else{
-            return {color: "red"}
-        }
-    }
+    // checkGradeColor = (grade) => {
+    //     // adjust color of grade notification
+    //     // debugger
+    //     if(grade > 89 && grade <= 100){
+    //         return {color: "green"}
+    //     }
+    //     else if (grade > 79 && grade <= 89){
+    //         return {color: "blue"}
+    //     }
+    //     else if (grade > 69 && grade <= 79){
+    //         return {color: "gold"}
+    //     }
+    //     else{
+    //         return {color: "red"}
+    //     }
+    // }
 
     render() {
         // console.log(this.props.assignment)
@@ -108,7 +108,15 @@ class Assignment extends Component {
                                  {this.checkIfSubmitted().created_at === this.checkIfSubmitted().updated_at ? 
                                     <h4>Grade Pending</h4> 
                                     :
-                                    <h4>Graded! Result: <span style={this.checkGradeColor(this.checkIfSubmitted().grade_assigned)}>{this.checkIfSubmitted().grade_assigned}</span>%</h4>
+                                    <Fragment>
+                                    <h4>Graded! Result: </h4>
+                                        {/* <span style={this.checkGradeColor(this.checkIfSubmitted().grade_assigned)}>{this.checkIfSubmitted().grade_assigned}</span>%</h4> */}
+                                    <div className="ui indicating progress stats" data-percent={this.checkIfSubmitted().grade_assigned} >
+                                        <div className="bar" style={{width: `${this.checkIfSubmitted().grade_assigned}%`}}>
+                                            <div class="progress">{this.checkIfSubmitted().grade_assigned}%</div>
+                                        </div>
+                                    </div>
+                                    </Fragment>
                                 }
                             </Fragment> 
                            
