@@ -13,7 +13,12 @@ function NavBar(props) {
                                 <i className="sidebar icon"></i>
                             </a> */}
                             <div className="active item"><Link to = "/home">Home</Link></div>
-                            <div className="item">About</div>
+                            <div className="item"><Link to="/about">
+                                About
+                            </Link></div>
+                            {/* <Link to="/courses">
+                                About
+                            </Link> */}
                             {/* <div className="item">View Courses</div> */}
                             <div className="right item">
                                 {
@@ -24,6 +29,9 @@ function NavBar(props) {
                                             <span data-tooltip={props.currentUser.position === "teacher" ? "Add New Course" : "Register for New Course"} data-position="bottom left">
                                                 <i className="plus big square outline icon"></i>
                                             </span>
+                                        </Link>
+                                        <Link to="/courses">
+                                            <div className="ui inverted teal button">My Courses</div>
                                         </Link>
                                         <Link to={props.currentUser.position === "teacher" ? `/profile/teacher/${props.currentUser.id}` : `/profile/student/${props.currentUser.id}`}>
                                             <div className="ui inverted secondary basic button">Profile</div>

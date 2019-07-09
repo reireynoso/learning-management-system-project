@@ -68,6 +68,10 @@ teachers = [
     }
 ]
 
+teachers.each do |teacher|
+    Teacher.create(teacher)
+end
+
 students = [
     {
         username: "rei", 
@@ -160,6 +164,10 @@ courses = [
     }
 ]
 
+courses.each do |course|
+    Course.create(course)
+end
+
 # algebra = Course.create(name: "Algebra", teacher_id: rei.id, subject_id: math.id);
 # algebra2 = Course.create(name: "Algebra 2", teacher_id: rei.id, subject_id: math.id);
 # music = Course.create(name: "Music", teacher_id: pete.id, subject_id: science.id);
@@ -207,73 +215,77 @@ announcements = [
         title: "Physics of Music Video", 
         information: Faker::Lorem.paragraph, 
         video_url: "https://www.youtube.com/watch?v=XDsk6tZX55g", 
-        course_id: Course.fifth.id
+        course_id: Course.all[4].id
     },
     {
         title: "Flower Disection", 
         information: Faker::Lorem.paragraph, 
         video_url: "https://www.youtube.com/watch?v=493WeySyf-8", 
-        course_id: Course.sixth.id
-    }
+        course_id: Course.all[5].id
+    },
     {
         title: "Physics Crash Course", 
         information: Faker::Lorem.paragraph, 
         video_url: "https://www.youtube.com/watch?v=6wb29I_79lA", 
-        course_id: Course.seventh.id
+        course_id: Course.all[6].id
     },
     {
         title: "American History X Review", 
         information: Faker::Lorem.paragraph, 
         video_url: "https://www.youtube.com/watch?v=AtzwHnz0CJw", 
-        course_id: Course.eighth.id
+        course_id: Course.all[7].id
     },
     {
         title: "History of Algorave Video", 
         information: Faker::Lorem.paragraph, 
         video_url: "https://www.youtube.com/watch?v=S2EZqikCIfY", 
-        course_id: Course.ninth.id
+        course_id: Course.all[8].id
     },
     {
         title: "Technology of Algorave Video", 
         information: Faker::Lorem.paragraph, 
         video_url: "https://www.youtube.com/watch?v=nAGjTYa95HM", 
-        course_id: Course.tenth.id
+        course_id: Course.all[9].id
     },
     {
         title: "Science of Algorave Video", 
         information: Faker::Lorem.paragraph, 
         video_url: "https://www.youtube.com/watch?v=h340aNznHnM", 
-        course_id: Course.eleventh.id
+        course_id: Course.all[10].id
     },
     {
         title: "Cats Poem Video", 
         information: Faker::Lorem.paragraph, 
         video_url: "https://www.youtube.com/watch?v=VuOOV06cmpI", 
-        course_id: Course.twelveth.id
+        course_id: Course.all[11].id
     },
     {
         title: "Cats History Video", 
         information: Faker::Lorem.paragraph, 
         video_url: "https://www.youtube.com/watch?v=Jsj-hDW9bS8", 
-        course_id: Course.thirteenth.id
+        course_id: Course.all[12].id
     },
     {
         title: "Cats Technology Video", 
         information: Faker::Lorem.paragraph, 
         video_url: "https://www.youtube.com/watch?v=wHbhUUyVn1U", 
-        course_id: Course.fourteenth.id
+        course_id: Course.all[13].id
     },
 ]
+
+announcements.each do |announcement|
+    Announcement.create(announcement)
+end
 # algebraAnnouncement1 = Announcement.create(title: "Hello", information: "TESTING THIS SHIT", video_url: "https://www.youtube.com/watch?v=dbCYsbb4C58", course_id: algebra.id)
 # algebraAnnouncement2 = Announcement.create(title: "Hello2", information: "TESTING", video_url: "https://www.youtube.com/watch?v=9DLtzc9KLiw", course_id: algebra.id)
 
 # reiStudent = Student.create(username: "rei", password: "hello", first_name: "Reinald", last_name:"Reynoso", bio: "Cool", image_url: "", position: "student" )
 # reiStudent2 = Student.create(username: "rei2", password: "hello", first_name: "Reinald", last_name:"Reynoso", bio: "Cool", image_url: "", position: "student" )
 
-enrollment1 = Enrollment.create(course_id: algebra.id, student_id: reiStudent.id)
+# enrollment1 = Enrollment.create(course_id: algebra.id, student_id: reiStudent.id)
 # enrollment2 = Enrollment.create(course_id: algebra.id, student_id: reiStudent2.id)
 
-assigned_date = (DateTime.now - 30)
+assigned_date = (DateTime.now + 1)
 
 assignments = [
     {
@@ -291,121 +303,82 @@ assignments = [
         course_id: Course.first.id, 
         due_date: assigned_date
         )
-end
-
-2.times do 
     Assignment.create(
         name: Faker::Lorem.sentence, 
         note: Faker::Lorem.paragraph, 
         course_id: Course.second.id, 
         due_date: assigned_date
         )
-end
-
-2.times do 
     Assignment.create(
         name: Faker::Lorem.sentence, 
         note: Faker::Lorem.paragraph, 
         course_id: Course.third.id, 
         due_date: assigned_date
         )
-end
-
-2.times do 
     Assignment.create(
         name: Faker::Lorem.sentence, 
         note: Faker::Lorem.paragraph, 
         course_id: Course.fourth.id, 
         due_date: assigned_date
         )
-end
-
-2.times do 
     Assignment.create(
         name: Faker::Lorem.sentence, 
         note: Faker::Lorem.paragraph, 
         course_id: Course.fifth.id, 
         due_date: assigned_date
         )
-end
-
-2.times do 
     Assignment.create(
         name: Faker::Lorem.sentence, 
         note: Faker::Lorem.paragraph, 
-        course_id: Course.sixth.id, 
+        course_id: Course.all[5].id, 
         due_date: assigned_date
         )
-end
-
-2.times do 
     Assignment.create(
         name: Faker::Lorem.sentence, 
         note: Faker::Lorem.paragraph, 
-        course_id: Course.seventh.id, 
+        course_id: Course.all[6].id, 
         due_date: assigned_date
         )
-end
-
-2.times do 
     Assignment.create(
         name: Faker::Lorem.sentence, 
         note: Faker::Lorem.paragraph, 
-        course_id: Course.eighth.id, 
+        course_id: Course.all[7].id, 
         due_date: assigned_date
         )
-end
-
-2.times do 
     Assignment.create(
         name: Faker::Lorem.sentence, 
         note: Faker::Lorem.paragraph, 
-        course_id: Course.ninth.id, 
+        course_id: Course.all[8].id, 
         due_date: assigned_date
         )
-end
-
-2.times do 
     Assignment.create(
         name: Faker::Lorem.sentence, 
         note: Faker::Lorem.paragraph, 
-        course_id: Course.tenth.id, 
+        course_id: Course.all[9].id, 
         due_date: assigned_date
         )
-end
-
-2.times do 
     Assignment.create(
         name: Faker::Lorem.sentence, 
         note: Faker::Lorem.paragraph, 
-        course_id: Course.eleventh.id, 
+        course_id: Course.all[10].id, 
         due_date: assigned_date
         )
-end
-
-2.times do 
     Assignment.create(
         name: Faker::Lorem.sentence, 
         note: Faker::Lorem.paragraph, 
-        course_id: Course.twelveth.id, 
+        course_id: Course.all[11].id, 
         due_date: assigned_date
         )
-end
-
-2.times do 
     Assignment.create(
         name: Faker::Lorem.sentence, 
         note: Faker::Lorem.paragraph, 
-        course_id: Course.thirteenth.id, 
+        course_id: Course.all[12].id, 
         due_date: assigned_date
         )
-end
-
-2.times do 
     Assignment.create(
         name: Faker::Lorem.sentence, 
         note: Faker::Lorem.paragraph, 
-        course_id: Course.fourteenth.id, 
+        course_id: Course.all[13].id, 
         due_date: assigned_date
         )
 end
@@ -414,97 +387,58 @@ end
     Problem.create(
         question: Faker::Lorem.question, 
         assignment_id: Assignment.first.id
-        )
-end
-
-4.times do 
+        ) 
     Problem.create(
         question: Faker::Lorem.question, 
         assignment_id: Assignment.second.id
         )
-end
-
-4.times do 
     Problem.create(
         question: Faker::Lorem.question, 
         assignment_id: Assignment.third.id
         )
-end
-
-4.times do 
     Problem.create(
         question: Faker::Lorem.question, 
         assignment_id: Assignment.fourth.id
         )
-end
-
-4.times do 
     Problem.create(
         question: Faker::Lorem.question, 
         assignment_id: Assignment.fifth.id
         )
-end
-
-4.times do 
     Problem.create(
         question: Faker::Lorem.question, 
-        assignment_id: Assignment.sixth.id
+        assignment_id: Assignment.all[5].id
         )
-end
-
-4.times do 
     Problem.create(
         question: Faker::Lorem.question, 
-        assignment_id: Assignment.seventh.id
+        assignment_id: Assignment.all[6].id
         )
-end
-
-4.times do 
     Problem.create(
         question: Faker::Lorem.question, 
-        assignment_id: Assignment.eighth.id
+        assignment_id: Assignment.all[7].id
         )
-end
-
-4.times do 
     Problem.create(
         question: Faker::Lorem.question, 
-        assignment_id: Assignment.ninth.id
+        assignment_id: Assignment.all[8].id
         )
-end
-
-4.times do 
     Problem.create(
         question: Faker::Lorem.question, 
-        assignment_id: Assignment.tenth.id
+        assignment_id: Assignment.all[9].id
         )
-end
-
-4.times do 
     Problem.create(
         question: Faker::Lorem.question, 
-        assignment_id: Assignment.eleventh.id
+        assignment_id: Assignment.all[10].id
         )
-end
-
-4.times do 
     Problem.create(
         question: Faker::Lorem.question, 
-        assignment_id: Assignment.twelveth.id
+        assignment_id: Assignment.all[11].id
         )
-end
-
-4.times do 
     Problem.create(
         question: Faker::Lorem.question, 
-        assignment_id: Assignment.thirteenth.id
+        assignment_id: Assignment.all[12].id
         )
-end
-
-4.times do 
     Problem.create(
         question: Faker::Lorem.question, 
-        assignment_id: Assignment.fourteenth.id
+        assignment_id: Assignment.all[13].id
         )
 end
 

@@ -45,6 +45,7 @@ class Login extends Component {
                     this.props.handleErrorMessage(user.failure)
                 }
                 else{
+                    // console.log(user.user)
                     this.props.changeUser(user.user)
                     this.props.history.push('/courses')
                 }

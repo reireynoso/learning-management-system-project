@@ -6,7 +6,7 @@ import GradingComponent from './GradingComponent'
 
 const containerStyle = {
     border: "2px solid black",
-    borderRadius: "20px",
+    borderRadius: "10px",
     overflow: "hidden"
 }
 
@@ -15,11 +15,11 @@ class SubmittedAssignments extends Component {
 
     state={
         currentSubmissionView: '',
-        grade: 0
+        // grade: 0
     }
 
     handleSubmitGrade = () => {
-        let percentage_grade =  (this.state.grade / (this.props.currentAssignment.problems.length * 10)) * 100 //each answer is worth 10 points max
+        // let percentage_grade =  (this.state.grade / (this.props.currentAssignment.problems.length * 10)) * 100 //each answer is worth 10 points max
         fetch(`http://localhost:3000/api/v1/submissions/${this.state.currentSubmissionView}`,{
             method: "PATCH",
             headers: {
@@ -27,7 +27,8 @@ class SubmittedAssignments extends Component {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                grade: percentage_grade
+                // grade: percentage_grade
+                id: this.state.currentSubmissionView
             })
         })
         .then(resp => resp.json())
@@ -35,18 +36,17 @@ class SubmittedAssignments extends Component {
             // console.log(data)
             this.props.updateSubmission(data)
             this.setState({
-                currentSubmissionView: '',
-                grade: 0
+                currentSubmissionView: ''
             })
             
         })
     }
 
-    addTallyToGrade = (num) => {
-        this.setState({
-            grade: this.state.grade + num
-        })
-    }
+    // addTallyToGrade = (num) => {
+    //     this.setState({
+    //         grade: this.state.grade + num
+    //     })
+    // }
     
     componentDidMount = () => {
         const course_id = this.props.location.pathname.split("/")[2]
@@ -151,7 +151,7 @@ class SubmittedAssignments extends Component {
                                        {/* <h1>{submission.assignment.due_date}</h1> */}
                                        {/* <h1>{submission.created_at}</h1> */}
                                        {
-                                           submission.assignment.due_date > submission.created_at ?
+                                           submission.assignment.due_date < submission.created_at ?
                                            <h4 style={{color: "red"}}>ALERT: Late Submission</h4>
                                            :
                                         //    <h1>Not late</h1>

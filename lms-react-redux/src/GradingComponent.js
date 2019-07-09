@@ -5,9 +5,10 @@ export default class GradingComponent extends Component {
         errorMessage: ''
     }
 
-    handleAssignPointClick = () => {
+    handleAssignPointClick = (e) => {
         const {question, answer, points_assigned, id, problem_id, submission_id,student_id} = this.props.answer
-        if(this.state.points_assigned >= 0 && this.state.points_assigned <= 10){
+        // if(this.state.points_assigned >= 0 && this.state.points_assigned <= 10){
+        if(e.target.value >= 0 && e.target.value <= 10){
             fetch(`http://localhost:3000/api/v1/answers/${this.props.answer.id}`,{
                 method: "PATCH",
                 headers: {
@@ -15,12 +16,13 @@ export default class GradingComponent extends Component {
                     "Accept": "application/json"
                 },
                 body: JSON.stringify({
-                    points_assigned: this.state.points_assigned
+                    // points_assigned: this.state.points_assigned
+                    points_assigned: e.target.value
                 })
             })
             .then(resp => resp.json())
             .then(data => {
-                // console.log(data)
+                console.log(data)
                 this.props.addTallyToGrade(data.points_assigned)
             })
         }
@@ -39,10 +41,10 @@ export default class GradingComponent extends Component {
     }
 
     handleOnChange = (e) => {
-        // console.log(e)
-        this.setState({
-            [e.target.name]: e.target.value
-        })
+        console.log(e.target.value)
+        // this.setState({
+        //     [e.target.name]: e.target.value
+        // })
     }
 
 
@@ -61,7 +63,8 @@ export default class GradingComponent extends Component {
                     null
                 }
                 {/* <input type="number" required style={{width: "50%"}} placeholder="Assign Points" name="points_assigned" onChange={this.handleOnChange} ></input> */}
-                <select className="ui search dropdown" name="points_assigned" onChange={this.handleOnChange}>
+                {/* <select className="ui search dropdown" name="points_assigned" onChange={this.handleOnChange}> */}
+                <select className="ui search dropdown" name="points_assigned" onChange={this.handleAssignPointClick}>
                     <option value="">Points</option>
                     <option value="0">0</option>
                     <option value="1">1</option>
@@ -76,7 +79,7 @@ export default class GradingComponent extends Component {
                     <option value="10">10</option>
                 </select>
                 {/* <input onClick={this.handleAssignPointClick} value="Assign Points" className="ui submit button"></input> */}
-                <button onClick={this.handleAssignPointClick} className="ui teal button">Assign Points</button>
+                {/* <button onClick={this.handleAssignPointClick} className="ui teal button">Assign Points</button> */}
          
             </div>
            

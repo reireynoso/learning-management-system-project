@@ -14,6 +14,7 @@ import RegisterCourseComponent from './RegisterCourseComponent'
 import NewAssignmentForm from './NewAssignmentForm'
 import SubmittedAssignments from './SubmittedAssignments';
 import ProfileComponent from './ProfileComponent';
+import AboutComponent from './AboutComponent';
 
 class App extends Component {
 
@@ -87,6 +88,7 @@ class App extends Component {
           <Route path='/courses/:id/announcements' component={CoursePageContainer}/>
           <Route path='/courses/:id' component={CoursePageContainer}/>
           <Route path='/courses' component={UserHomePage} />
+          <Route path='/about' component={AboutComponent}></Route>
           <Route path='/' component={UserHomePage} />
           <Route render={() => <Redirect to = "/home"/>}/>
         </Switch>

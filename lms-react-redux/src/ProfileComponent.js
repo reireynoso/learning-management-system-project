@@ -177,7 +177,7 @@ class ProfileComponent extends Component {
                 <h1>Profile</h1>
                 {
                     Object.keys(this.props.currentUser).length !== 0 ?
-                    <div className="ui centered card" style={{width: "400px"}}>
+                    <div className="ui centered card">
                         <div className="image">
                             <img src={this.props.currentUser.image_url}/>
                         </div>

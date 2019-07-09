@@ -10,7 +10,7 @@ import AssignmentProblemComponent from './AssignmentProblemsComponent'
 
 const containerStyle = {
     border: "2px solid black",
-    borderRadius: "20px",
+    borderRadius: "10px",
     overflow: "hidden"
     
 }

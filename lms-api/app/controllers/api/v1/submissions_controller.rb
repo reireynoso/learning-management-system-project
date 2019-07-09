@@ -36,9 +36,17 @@ class Api::V1::SubmissionsController < ApplicationController
     end
 
     def update 
-        # byebug
+        total_points = 0  
         @submission = Submission.find(params[:id])
-        @submission.update(grade_assigned: params[:grade])
+        # byebug
+        @submission.answers.each do |answer|
+            total_points += answer.points_assigned 
+        end
+        # byebug
+        total_answers = @submission.answers.count
+        grade_percentage = (total_points.to_f / total_answers.to_f) * 10
+        # byebug
+        @submission.update(grade_assigned: grade_percentage)
         # byebug
         render json: @submission
         # render json: {submission: SubmissionSerializer.new(@submission)}
