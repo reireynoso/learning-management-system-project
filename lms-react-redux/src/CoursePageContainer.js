@@ -124,14 +124,7 @@ class CoursePageContainer extends Component {
                             Object.keys(this.props.currentUser).length !== 0 && this.props.currentUser.position === "teacher" ? 
                             <NewAnnouncementForm url={this.url[this.url.length-1]}/>
                             :
-                            <div className="ui segment">
-                            <div className="ui active inverted dimmer">
-                                <div className="ui large text loader">Loading</div>
-                            </div>
-                            <p></p>
-                            <p></p>
-                            <p></p>
-                            </div>
+                            null
                         }
                         
                         {
@@ -154,7 +147,14 @@ class CoursePageContainer extends Component {
                                 // return <AnnouncementCard key={announcement.id} url={this.url[this.url.length-1]} announcement={announcement}/>
                             })
                             :
-                            null
+                            <div className="ui segment">
+                            <div className="ui active inverted dimmer">
+                                <div className="ui large text loader">Loading</div>
+                            </div>
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                            </div>
                         }
                         </Fragment>
                         }

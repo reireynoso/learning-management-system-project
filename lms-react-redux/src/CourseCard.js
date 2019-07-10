@@ -1,10 +1,38 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {Confirm} from 'semantic-ui-react'
+
 
 function CourseCard(props) {
     // console.log(props.course.id)
     const token = localStorage.getItem("token")
+
+    const [open, setOpen] = useState(false)
+    const [openStudent, setOpenStudent] = useState(false)
+
+    function show(){
+        setOpen(true)
+    }
+    function handleConfirm(id){
+        handleOnClick()
+        setOpen(false)
+    }
+    function handleCancel(){
+        setOpen(false)
+    }
+
+    function studentShow(){
+        setOpenStudent(true)
+    }
+    function studentHandleConfirm(id){
+        handleStudentClick()
+        setOpenStudent(false)
+    }
+    function studentHandleCancel(){
+        setOpenStudent(false)
+    }
+
     function handleOnClick(){
         // console.log(props.course.id)
         fetch(`http://localhost:3000/api/v1/teachers/${props.currentUser.id}/courses/${props.course.id}`,{
@@ -75,11 +103,25 @@ function CourseCard(props) {
                     {
                         props.currentUser.position === 'teacher' ? 
                         <span data-tooltip="Delete Course" data-position="bottom left">
-                            <i onClick={handleOnClick} className="big trash icon"></i>
+                            <i onClick={() => show()} className="big red trash icon"></i>
+                            <Confirm
+                                open={open}
+                                header='Removing this Course.'
+                                onCancel={() => handleCancel()}
+                                onConfirm={() => handleConfirm()}
+                                />
                         </span>
                          
                          :
-                         <button onClick={handleStudentClick} className="ui red button">Drop Course</button>
+                         <React.Fragment>
+                            <button onClick={()=> studentShow()} className="ui red button">Drop Course</button>
+                            <Confirm
+                                    open={openStudent}
+                                    header='Removing this Course.'
+                                    onCancel={() => studentHandleCancel()}
+                                    onConfirm={() => studentHandleConfirm()}
+                                    />
+                        </React.Fragment>
                     }      
                 </div>
         </div>

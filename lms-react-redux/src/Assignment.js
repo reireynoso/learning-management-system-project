@@ -2,11 +2,23 @@ import React, { Component,Fragment } from 'react'
 import {connect} from 'react-redux'
 import Moment from 'react-moment'
 import {Link} from 'react-router-dom'
+import {Confirm} from 'semantic-ui-react'
 
 const lateStyle = {
     color: "red"
 }
 class Assignment extends Component {
+
+    state = { open: false }
+
+    show = () => this.setState({ open: true })
+    handleConfirm = (id) => {
+        this.handleOnClick(id)
+        this.setState({ 
+            open: false 
+        })
+    }
+    handleCancel = () => this.setState({ open: false })
     
     handleOnClick = (id) => {
         const token = localStorage.getItem("token")
@@ -89,7 +101,13 @@ class Assignment extends Component {
                     Object.keys(this.props.currentUser).length !== 0 && this.props.currentUser.position === "teacher" ?
                     <Fragment>
                         <span data-tooltip="Delete Assignment" data-position="top left">
-                            <i onClick={() => this.handleOnClick(this.props.assignment.id)} className="trash red big icon"></i> 
+                            <i onClick={this.show} className="trash red big icon"></i> 
+                            <Confirm
+                                open={this.state.open}
+                                header='Deleting this assignment.'
+                                onCancel={this.handleCancel}
+                                onConfirm={() => this.handleConfirm(this.props.assignment.id)}
+                                />
                         </span>
                         
                         <span data-tooltip="Add Questions to Assignment" data-position="top left">

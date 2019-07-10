@@ -1,6 +1,7 @@
 // import React from 'react'
 import {connect} from 'react-redux'
 import React, { Component, Fragment } from 'react'
+import {Confirm} from "semantic-ui-react"
 
 const token = localStorage.getItem("token")
 
@@ -9,8 +10,29 @@ class AnnouncementCard extends Component {
     state={
         showComments: false,
         allComments: [],
-        comment: ''
+        comment: '',
+        open: false,
+        openComment: false
     }
+
+    show = () => this.setState({ open: true })
+    handleConfirm = (id) => {
+        this.handleOnClick(id)
+        this.setState({ 
+            open: false 
+        })
+    }
+    handleCancel = () => this.setState({ open: false })
+
+    showComment = () => this.setState({ openComment: true })
+    handleCommentConfirm = (id) => {
+        this.handleCommentDelete(id)
+        this.setState({ 
+            openComment: false 
+        })
+    }
+    handleCommentCancel = () => this.setState({ openComment: false })
+
     handleOnClick = (id) =>{
         // console.log(id)
         fetch(`http://localhost:3000/api/v1/courses/${this.props.url}/announcements/${id}`,{
@@ -115,7 +137,7 @@ class AnnouncementCard extends Component {
             .then(resp => resp.json())
             .then(data => {
                 // debugger
-                console.log(data)
+                // console.log(data)
                 //return ALL comments. filters which comments belong to the specific announcement clicked
                 let specificAnnouncementComments = data.filter(comment => {
                     return comment.announcement.id === id 
@@ -149,7 +171,13 @@ class AnnouncementCard extends Component {
                 Object.keys(this.props.currentUser).length !== 0 && this.props.currentUser.position === "teacher" ? 
                 <Fragment>
                     <span data-tooltip="Delete Announcement" data-position="top left">
-                        <i onClick={()=> this.handleOnClick(id)} className="trash red big alternate outline icon"></i>
+                        <i onClick={this.show} className="trash red big alternate outline icon"></i>
+                        <Confirm
+                                open={this.state.open}
+                                header='Deleting this Announcement.'
+                                onCancel={this.handleCancel}
+                                onConfirm={() => this.handleConfirm(id)}
+                                />
                     </span>
                     <span data-tooltip="Edit Announcement" data-position="top left">
                         <i onClick={()=> this.props.handleEditClick(id)} className="edit violet big outline icon"></i>
@@ -203,14 +231,21 @@ class AnnouncementCard extends Component {
                                 {
                                     comment.commentable.id === this.props.currentUser.id ?
                                     <span data-tooltip="Remove Comment" data-position="top left">
-                                        <i onClick={()=> this.handleCommentDelete(comment.id)} className="hand big scissors icon"></i>
+                                        <i onClick={()=> this.showComment()} className="hand big scissors icon"></i>
+                                        <Confirm
+                                            open={this.state.openComment}
+                                            header='Removing this Comment.'
+                                            onCancel={() => this.handleCommentCancel()}
+                                            onConfirm={() => this.handleCommentConfirm(comment.id)}
+                                            />
                                     </span>
                                     :
-                                    <div className="ui segment">
-                                    <div className="ui active inverted dimmer">
-                                        <div className="ui small text loader">Loading</div>
-                                    </div>
-                                    </div>
+                                    // <div className="ui segment">
+                                    // <div className="ui active inverted dimmer">
+                                    //     <div className="ui small text loader">Loading</div>
+                                    // </div>
+                                    // </div>
+                                    null
                                 }
                                 </div>
                             </div>

@@ -14,7 +14,7 @@ function UserHomePage(props) {
             {
                 props.currentUser.position === 'teacher' ?
 
-                <h1>Classes You Are Teaching</h1>
+                <h1>Classes You're Teaching</h1>
                 :
                 <React.Fragment>
                     <Link to="/registerCourse">
