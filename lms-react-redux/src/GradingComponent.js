@@ -9,11 +9,13 @@ export default class GradingComponent extends Component {
         const {question, answer, points_assigned, id, problem_id, submission_id,student_id} = this.props.answer
         // if(this.state.points_assigned >= 0 && this.state.points_assigned <= 10){
         if(e.target.value >= 0 && e.target.value <= 10){
+            const token = localStorage.getItem("token")
             fetch(`http://localhost:3000/api/v1/answers/${this.props.answer.id}`,{
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
-                    "Accept": "application/json"
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify({
                     // points_assigned: this.state.points_assigned
@@ -23,7 +25,7 @@ export default class GradingComponent extends Component {
             .then(resp => resp.json())
             .then(data => {
                 console.log(data)
-                this.props.addTallyToGrade(data.points_assigned)
+                // this.props.addTallyToGrade(data.points_assigned)
             })
         }
         else{
@@ -79,8 +81,7 @@ export default class GradingComponent extends Component {
                     <option value="10">10</option>
                 </select>
                 {/* <input onClick={this.handleAssignPointClick} value="Assign Points" className="ui submit button"></input> */}
-                {/* <button onClick={this.handleAssignPointClick} className="ui teal button">Assign Points</button> */}
-         
+                {/* <button onClick={this.handleAssignPointClick} className="ui teal button">Assign Points</button> */}  
             </div>
            
         )

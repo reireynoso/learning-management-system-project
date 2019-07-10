@@ -1,5 +1,5 @@
 class Api::V1::CoursesController < ApplicationController
-    # skip_before_action :require_login, only: [:index]
+    skip_before_action :require_login, only: [:index]
     def index 
         @courses = Course.all
         # byebug
@@ -28,7 +28,7 @@ class Api::V1::CoursesController < ApplicationController
 
     def destroy
         # byebug 
-        Course.delete(params[:id])
+        Course.destroy(params[:id])
         render json: {success: "Course Deleted"}
     end
 

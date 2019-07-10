@@ -9,8 +9,12 @@ const lateStyle = {
 class Assignment extends Component {
     
     handleOnClick = (id) => {
+        const token = localStorage.getItem("token")
         fetch(`http://localhost:3000/api/v1/courses/${this.props.url}/assignments/${id}`,{
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`
+           }
         })
         .then(resp => resp.json())
         .then(data => {
@@ -48,22 +52,22 @@ class Assignment extends Component {
         return today 
     }
 
-    // checkGradeColor = (grade) => {
-    //     // adjust color of grade notification
-    //     // debugger
-    //     if(grade > 89 && grade <= 100){
-    //         return {color: "green"}
-    //     }
-    //     else if (grade > 79 && grade <= 89){
-    //         return {color: "blue"}
-    //     }
-    //     else if (grade > 69 && grade <= 79){
-    //         return {color: "gold"}
-    //     }
-    //     else{
-    //         return {color: "red"}
-    //     }
-    // }
+    checkGradeColor = (grade) => {
+        // adjust color of grade notification
+        // debugger
+        if(grade > 89 && grade <= 100){
+            return "green"
+        }
+        else if (grade > 79 && grade <= 89){
+            return "blue"
+        }
+        else if (grade > 69 && grade <= 79){
+            return "gold"
+        }
+        else{
+            return "red"
+        }
+    }
 
     render() {
         // console.log(this.props.assignment)
@@ -85,15 +89,15 @@ class Assignment extends Component {
                     Object.keys(this.props.currentUser).length !== 0 && this.props.currentUser.position === "teacher" ?
                     <Fragment>
                         <span data-tooltip="Delete Assignment" data-position="top left">
-                            <i onClick={() => this.handleOnClick(this.props.assignment.id)} className="trash big icon"></i> 
+                            <i onClick={() => this.handleOnClick(this.props.assignment.id)} className="trash red big icon"></i> 
                         </span>
                         
                         <span data-tooltip="Add Questions to Assignment" data-position="top left">
-                            <i onClick={()=> this.props.handleAssignmentClick(this.props.assignment)}className="edit big icon"></i>   
+                            <i onClick={()=> this.props.handleAssignmentClick(this.props.assignment)}className="edit violet big icon"></i>   
                         </span>
                         <Link style={{color: 'black'}} to={{pathname: `/courses/${this.props.assignment.course_id}/assignments/${this.props.assignment.id}/submissions`, assignmentObj: this.props.assignment}}>
                             <span data-tooltip="View Submissions" data-position="top left"> 
-                                <i className="folder open outline big icon"></i>
+                                <i className="folder orange open outline big icon"></i>
                             </span>
                         </Link>
                         
@@ -112,8 +116,8 @@ class Assignment extends Component {
                                     <h4>Graded! Result: </h4>
                                         {/* <span style={this.checkGradeColor(this.checkIfSubmitted().grade_assigned)}>{this.checkIfSubmitted().grade_assigned}</span>%</h4> */}
                                     <div className="ui indicating progress stats" data-percent={this.checkIfSubmitted().grade_assigned} >
-                                        <div className="bar" style={{width: `${this.checkIfSubmitted().grade_assigned}%`}}>
-                                            <div class="progress">{this.checkIfSubmitted().grade_assigned}%</div>
+                                        <div className="bar" style={{width: `${this.checkIfSubmitted().grade_assigned}%`, backgroundColor: this.checkGradeColor(this.checkIfSubmitted().grade_assigned)}}>
+                                            <div className="progress" >{this.checkIfSubmitted().grade_assigned}%</div>
                                         </div>
                                     </div>
                                     </Fragment>

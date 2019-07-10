@@ -1,4 +1,5 @@
 class Api::V1::StudentsController < ApplicationController
+    skip_before_action :require_login, only: [:create]
     def index 
         @students = Student.all 
         render json: @students
@@ -15,7 +16,8 @@ class Api::V1::StudentsController < ApplicationController
             token = encode_token(payload)
             render json: {student: StudentSerializer.new(@student), jwt: token}
         else
-            render json: { error: 'failed to create user' }, status: :not_acceptable
+            render json: {errors: @student.errors.full_messages}, status: :not_acceptable
+            # render json: { error: 'failed to create user' }, status: :not_acceptable
         end
     end
 

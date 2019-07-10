@@ -2,6 +2,8 @@
 import {connect} from 'react-redux'
 import React, { Component, Fragment } from 'react'
 
+const token = localStorage.getItem("token")
+
 class AnnouncementCard extends Component {
 
     state={
@@ -12,7 +14,10 @@ class AnnouncementCard extends Component {
     handleOnClick = (id) =>{
         // console.log(id)
         fetch(`http://localhost:3000/api/v1/courses/${this.props.url}/announcements/${id}`,{
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`
+           }
         })
         .then(resp => resp.json())
         .then(data => {
@@ -48,7 +53,10 @@ class AnnouncementCard extends Component {
         //     allComments: deletedComment
         // })
         fetch(`http://localhost:3000/api/v1/courses/${this.props.url}/announcements/${this.props.announcement.id}/comments/${commentId}`,{
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
         })
         .then(resp => resp.json())
         .then(data => {
@@ -67,7 +75,8 @@ class AnnouncementCard extends Component {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Accept": "application/json"
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify({
                     comment: {
@@ -98,10 +107,15 @@ class AnnouncementCard extends Component {
             })
         }
         else{
-            fetch(`http://localhost:3000/api/v1/courses/${this.props.url}/announcements/${id}/comments`)
+            fetch(`http://localhost:3000/api/v1/courses/${this.props.url}/announcements/${id}/comments`, {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
             .then(resp => resp.json())
             .then(data => {
-                // console.log(data)
+                // debugger
+                console.log(data)
                 //return ALL comments. filters which comments belong to the specific announcement clicked
                 let specificAnnouncementComments = data.filter(comment => {
                     return comment.announcement.id === id 
@@ -135,14 +149,14 @@ class AnnouncementCard extends Component {
                 Object.keys(this.props.currentUser).length !== 0 && this.props.currentUser.position === "teacher" ? 
                 <Fragment>
                     <span data-tooltip="Delete Announcement" data-position="top left">
-                        <i onClick={()=> this.handleOnClick(id)} className="trash big alternate outline icon"></i>
+                        <i onClick={()=> this.handleOnClick(id)} className="trash red big alternate outline icon"></i>
                     </span>
                     <span data-tooltip="Edit Announcement" data-position="top left">
-                        <i onClick={()=> this.props.handleEditClick(id)} className="edit big outline icon"></i>
+                        <i onClick={()=> this.props.handleEditClick(id)} className="edit violet big outline icon"></i>
                     </span>
 
                     <span data-tooltip="View Comments" data-position="top left">
-                        <i onClick={() => this.handleViewCommentsClick(id)} className="eye big icon"></i>
+                        <i onClick={() => this.handleViewCommentsClick(id)} className="eye orange big icon"></i>
                     </span>
                     
                     
@@ -160,25 +174,45 @@ class AnnouncementCard extends Component {
                         <div className="field">
                             <br></br>
                             {/* <label>Post Comment</label> */}
-                            <textarea name="comment" placeholder="Share your comments or thoughts! Keep it friendly!" onChange={this.handleCommentChange} rows="2"></textarea>
+                            <textarea required name="comment" placeholder="Share your comments or thoughts! Keep it friendly!" onChange={this.handleCommentChange} rows="2"></textarea>
                         </div>
                         <button className="ui blue button" type="submit" value="Submit">Comment</button>
                     </form>
                     {   
                         this.state.allComments.length !== 0?
                         this.state.allComments.map(comment =>{
-                            return <div key={comment.id} className="ui segment">
-                                <h4>Comment: {comment.content}</h4>
-                                <p>By: {comment.commentable.username} | {comment.commentable.position}</p>
+                            return <div key={comment.id} className="ui comments">
+                                {/* <div className="avatar">
+                                    <img className="ui mini image" src={comment.commentable.image_url}></img>
+                                </div>
+                                <h4>{comment.content}</h4> */}
+                            
+                                <div className="comment">
+ 
+                                <div className="avatar">
+                                    <img className="ui mini image" src={comment.commentable.image_url}/>
+                                </div>
+                                <p>{comment.content}</p>
+                                <div className="content">
+                                    <div className="author">
+                                    By: {comment.commentable.username} | {comment.commentable.position}
+                                    </div>
+                                </div>
+                               
+                                {/* <p>By: {comment.commentable.username} | {comment.commentable.position}</p> */}
                                 {
                                     comment.commentable.id === this.props.currentUser.id ?
                                     <span data-tooltip="Remove Comment" data-position="top left">
                                         <i onClick={()=> this.handleCommentDelete(comment.id)} className="hand big scissors icon"></i>
                                     </span>
                                     :
-                                    null
+                                    <div className="ui segment">
+                                    <div className="ui active inverted dimmer">
+                                        <div className="ui small text loader">Loading</div>
+                                    </div>
+                                    </div>
                                 }
-                                
+                                </div>
                             </div>
                         })
                         :
@@ -192,9 +226,7 @@ class AnnouncementCard extends Component {
                 :
                 null
             }
-            
             </div>
-            
         </div>
         )
     }

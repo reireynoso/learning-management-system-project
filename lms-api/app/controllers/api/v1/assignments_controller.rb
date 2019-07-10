@@ -16,7 +16,7 @@ class Api::V1::AssignmentsController < ApplicationController
     end
 
     def destroy 
-        Assignment.delete(params[:id])
+        Assignment.destroy(params[:id])
         render json: {success: "Assignment deleted"}
     end
 

@@ -39,11 +39,14 @@ class CoursePageContainer extends Component {
     }
     url = this.props.history.location.pathname.split("/")
     componentDidMount = () => {
-        // const token = localStorage.getItem("token")
+
+        const token = localStorage.getItem("token")
         // let url = this.props.history.location.pathname.split("/")
         // console.log(url[url.length-1])
         fetch(`http://localhost:3000/api/v1/courses/${this.url[this.url.length-1]}`, {
-            
+           headers: {
+                "Authorization": `Bearer ${token}`
+           }
         })
         .then(resp => resp.json())
         .then(data => {
@@ -66,7 +69,6 @@ class CoursePageContainer extends Component {
     }
 
     render() {
-        // console.log('helllo')
         // let url = this.props.history.location.pathname.split("/")
         // console.log(url[url.length-1])
         // console.log(this.state.assignmentObject)
@@ -82,13 +84,12 @@ class CoursePageContainer extends Component {
                                 <Link style={{color: 'black'}} to= {`${this.props.location.pathname}/assignments/new`}>
                                     
                                     <span data-tooltip="Add New Assignment" data-position="bottom right">
-                                        <i className="plus big square icon"></i>
+                                        <i className="plus blue big square icon"></i>
                                     </span>
                                 </Link>
                                 :
                                 null
                             }
-                     
                         </div>
                         {/* <h1>Assignments</h1> */}
                         {
@@ -123,7 +124,14 @@ class CoursePageContainer extends Component {
                             Object.keys(this.props.currentUser).length !== 0 && this.props.currentUser.position === "teacher" ? 
                             <NewAnnouncementForm url={this.url[this.url.length-1]}/>
                             :
-                            null
+                            <div className="ui segment">
+                            <div className="ui active inverted dimmer">
+                                <div className="ui large text loader">Loading</div>
+                            </div>
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                            </div>
                         }
                         
                         {

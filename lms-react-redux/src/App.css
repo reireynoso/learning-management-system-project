@@ -1,7 +1,10 @@
 .App {
   text-align: center;
+  
 }
-
+body {
+  transition:all 0.3s ease;
+}
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
@@ -23,11 +26,79 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
+/* .profile:hover
+{
+  box-shadow: inset 0 0 0 25px #61dafb;
+} */
+
+.profile {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+  /* animation-fill-mode: forwards; */
+}
+
+.course
+{
+  opacity:0.8;
+  transition:all 0.3s ease;
+}
+.course:hover
+{
+  opacity:1;
+  transition:all 0.3s ease;
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+#about-image{
+  position: relative;
+  animation-name: image ;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+#about-info{
+  /* margin-right: 1em; */
+  position: relative;
+  animation-name: text-stuff;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes image{
+  0% {transform: translate(200px);}
+  100% {transform: translate(0px); }
+}
+
+@keyframes text-stuff{
+  0% {transform: translate(-200px);}
+  100% {transform: translate(0px); }
+}
+
+@-webkit-keyframes fadeInDown {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
   }
+
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
   }
 }

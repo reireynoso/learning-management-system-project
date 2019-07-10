@@ -1,6 +1,7 @@
 import React, { Component,Fragment } from 'react'
 import { Bar,Polar } from 'react-chartjs-2';
 import {connect} from 'react-redux'
+import {Animated} from 'react-animated-css'
 
 class ProfileComponent extends Component {
     state = {
@@ -78,9 +79,13 @@ class ProfileComponent extends Component {
       }
 
       handleGraphView = (graphName) => {
+        let Scroll = require('react-scroll')
+        let scroll = Scroll.animateScroll;
+
         this.setState({
             graphView: graphName
         })
+        scroll.scrollToBottom()
       }
 
     //   averageCalculator = (scoresArray) => {
@@ -139,11 +144,16 @@ class ProfileComponent extends Component {
     //   }
 
       componentDidMount = () => {
+        const token = localStorage.getItem("token")
         const urlSplit = this.props.history.location.pathname.split("/")
         const url = urlSplit[3]
         const path = urlSplit[2]// checks where to fetch. either student or teacher path
         
-        fetch(`http://localhost:3000/api/v1/${path}s/${url}/${path}_grades`)
+        fetch(`http://localhost:3000/api/v1/${path}s/${url}/${path}_grades`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+           }
+        })
         .then(resp => resp.json())
         .then(data => {
             // console.log(data)
@@ -177,6 +187,7 @@ class ProfileComponent extends Component {
                 <h1>Profile</h1>
                 {
                     Object.keys(this.props.currentUser).length !== 0 ?
+                    <Animated animationIn="fadeInLeft" animationInDuration={2000} animationOut="fadeOut" isVisible={true}>
                     <div className="ui centered card">
                         <div className="image">
                             <img src={this.props.currentUser.image_url}/>
@@ -186,6 +197,7 @@ class ProfileComponent extends Component {
                             <p>{this.props.currentUser.bio}</p>
                         </div>
                     </div>
+                    </Animated>
                     :
                     <h1>Loading</h1>
                 }

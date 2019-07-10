@@ -16,6 +16,7 @@ import SubmittedAssignments from './SubmittedAssignments';
 import ProfileComponent from './ProfileComponent';
 import AboutComponent from './AboutComponent';
 
+
 class App extends Component {
 
   state = {
@@ -42,12 +43,12 @@ class App extends Component {
     if(token){
       fetch("http://localhost:3000/api/v1/auto_login",{
       headers: {
-        Authorization: token
+        Authorization: `Bearer ${token}`
       }
     })
     .then(resp => resp.json())
     .then(data => {
-        // console.log(data)
+        console.log(data)
         this.props.setUser(data)
         // this.props.setUserCourses(data.courses)
         
@@ -69,14 +70,15 @@ class App extends Component {
   render() {
     // debugger
     return (
+      
       <div className="App">
         <NavBar/>  
-        {/* {
-          Object.keys(this.props.currentUser).length !== 0 ?  */}
+        {
+          Object.keys(this.props.currentUser).length !== 0 ?  
           <Switch>
 
-          <Route path='/login' render={(routerProps) => {return <Login handleErrorMessage={this.handleErrorMessage} errorState={this.state} {...routerProps}/>}}/>
-          <Route path='/signUp' component={SignUp} /> 
+          {/* <Route path='/login' render={(routerProps) => {return <Login handleErrorMessage={this.handleErrorMessage} errorState={this.state} {...routerProps}/>}}/>
+          <Route path='/signUp' component={SignUp} />  */}
 
           <Route path="/home" component={LandingPage}/>
           <Route path="/profile/student/:id" component={ProfileComponent}/>
@@ -92,15 +94,16 @@ class App extends Component {
           <Route path='/' component={UserHomePage} />
           <Route render={() => <Redirect to = "/home"/>}/>
         </Switch>
-        {/* // :
-        // <Switch>
-        //     <Route path='/login' component={Login}/>
-        //     <Route path='/signUp' component={SignUp} /> 
-        //     <Route path="/home" component={LandingPage}/>
-        //     <Route path='/' render={() => <Redirect to= "/login" />} />
-        // </Switch>
+         :
+        <Switch>
+            <Route path='/login' render={(routerProps) => {return <Login handleErrorMessage={this.handleErrorMessage} errorState={this.state} {...routerProps}/>}}/>
+            <Route path='/signUp' component={SignUp} /> 
+            <Route path='/about' component={AboutComponent}></Route>
+            <Route path="/home" component={LandingPage}/>
+            <Route path='/' render={() => <Redirect to= "/login" />} />
+        </Switch>
           
-        // } */}
+        }
     </div>
     )
   }

@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 // import lifecycle from 'react-pure-lifecycle';
+import {Animated} from 'react-animated-css'
 
 function LandingPage() {
 
@@ -10,13 +11,19 @@ function LandingPage() {
             <div className="pusher">
                 <div className="ui inverted vertical masthead center aligned segment">
                     <div className="ui text container" style={{height:"85vh"}}>
-                            <h1 className="ui inverted header">
-                                Manage teaching and learning with this Learning Management System.
-                            </h1>
-                            <h2>LMS helps connect teachers and students, boost collaboration, and share educational resources</h2>
-                            <Link to="/courses">
-                                <div className="ui huge primary button">Go to Class <i className="right arrow icon"></i></div>
-                            </Link>
+                            <Animated animationIn="fadeInLeft" animationInDuration={2000} animationOut="fadeOut" isVisible={true}>
+                                <h1 className="ui inverted header">
+                                    Manage teaching and learning with this Learning Management System.
+                                </h1>
+                            </Animated>
+                            <Animated animationIn="fadeInRight" animationInDuration={2000} animationOut="fadeOut" isVisible={true}>
+                                <h2>LMS helps connect teachers and students, boost collaboration, and share educational resources</h2>
+                            </Animated>
+                            <Animated animationInDelay={2000} animationOut="fadeOut" isVisible={true}>
+                                <Link to="/courses">
+                                    <div className="ui huge primary button">Go to Class <i className="right arrow icon"></i></div>
+                                </Link>
+                            </Animated>
                     </div>
                 </div>
             </div>

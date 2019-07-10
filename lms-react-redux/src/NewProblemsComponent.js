@@ -13,12 +13,14 @@ class NewProblemsComponent extends Component {
     }
 
     handleOnSubmit = (e) => {
+        const token = localStorage.getItem("token")
         e.preventDefault();
         fetch(`http://localhost:3000/api/v1/courses/${this.props.assignmentObject.course_id}/assignments/${this.props.assignmentObject.id}/problems`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Accept": "application/json"
+                "Accept": "application/json",
+                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({
                 problem: {

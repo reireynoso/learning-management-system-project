@@ -33,12 +33,13 @@ class RegisterCourseComponent extends Component {
     handleRegisterClick = (course_id) => {
         console.log(course_id)
         // console.log(this.state)
-        
+        const token = localStorage.getItem("token")
         fetch(`http://localhost:3000/api/v1/students/${this.props.url}/enrollments`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Accept": "application/json"
+                "Accept": "application/json",
+                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({
                 enrollment: {
@@ -113,7 +114,7 @@ class RegisterCourseComponent extends Component {
                     {this.format(this.props.allCourses).map(course => {
                     if(course.subject.name.includes(this.state.selectedSubject)){ //checks if subject matches sort
                         return <div key={course.id} className="column">
-                            <div className="ui segment">
+                            <div className="ui segment course">
                                 <h1>{course.name}</h1>
                                 <h3>{course.subject.name}</h3>
                                 <h4>{`Instructor: ${course.teacher.first_name} ${course.teacher.last_name}`}</h4>

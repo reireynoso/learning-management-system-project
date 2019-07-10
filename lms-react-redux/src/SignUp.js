@@ -64,7 +64,7 @@ class SignUp extends Component {
             }) 
             .then(res => res.json())
             .then(user => {
-                // console.log(user)
+                // console.log(user.errors)
                 if(user.errors){
                     // alert(user.errors)
                     this.setState({

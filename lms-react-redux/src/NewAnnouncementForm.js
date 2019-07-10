@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 
+
 class NewAnnouncementForm extends Component {
     state = {
         title: '',
@@ -17,13 +18,15 @@ class NewAnnouncementForm extends Component {
     }
 
     handleOnSubmit = (e) => {
+        const token = localStorage.getItem("token")
         e.preventDefault();
         // console.log(this.state)
         fetch(`http://localhost:3000/api/v1/courses/${this.props.url}/announcements`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Accept": "application/json"
+                "Accept": "application/json",
+                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({
                 announcement: this.state

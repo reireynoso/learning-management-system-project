@@ -1,8 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import {connect} from 'react-redux'
 import GradingComponent from './GradingComponent'
-// import {Link} from 'react-router-dom'
-
 
 const containerStyle = {
     border: "2px solid black",
@@ -11,20 +9,24 @@ const containerStyle = {
 }
 
 
+
 class SubmittedAssignments extends Component {
 
     state={
         currentSubmissionView: '',
-        // grade: 0
+        // grade: 0,
+        loaded: false
     }
 
     handleSubmitGrade = () => {
         // let percentage_grade =  (this.state.grade / (this.props.currentAssignment.problems.length * 10)) * 100 //each answer is worth 10 points max
+        const token = localStorage.getItem("token")
         fetch(`http://localhost:3000/api/v1/submissions/${this.state.currentSubmissionView}`,{
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
-                "Accept": "application/json"
+                "Accept": "application/json",
+                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({
                 // grade: percentage_grade
@@ -51,9 +53,21 @@ class SubmittedAssignments extends Component {
     componentDidMount = () => {
         const course_id = this.props.location.pathname.split("/")[2]
         const assignment_id = this.props.location.pathname.split("/")[4]
-        fetch(`http://localhost:3000/api/v1/courses/${course_id}/assignments/${assignment_id}`)
+        // console.log(assignment_id)
+        const token = localStorage.getItem("token")
+        fetch(`http://localhost:3000/api/v1/courses/${course_id}/assignments/${assignment_id}`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
         .then(resp => resp.json())
-        .then(data => this.props.setAssignment(data))
+        .then(data => {
+            // console.log(data)
+            this.props.setAssignment(data)
+            this.setState({
+                loaded: true
+            })
+        })
     }
 
     handleAssignmentClick = (id) => {
@@ -73,27 +87,28 @@ class SubmittedAssignments extends Component {
         } 
     }
 
-    // checkGradeColor = (grade) => {
-    //     // adjust color of grade notification
-    //     // debugger
-    //     if(grade > 89 && grade <= 100){
-    //         return {color: "green"}
-    //     }
-    //     else if (grade > 79 && grade <= 89){
-    //         return {color: "blue"}
-    //     }
-    //     else if (grade > 69 && grade <= 79){
-    //         return {color: "gold"}
-    //     }
-    //     else{
-    //         return {color: "red"}
-    //     }
-    // }
+    checkGradeColor = (grade) => {
+        // adjust color of grade notification
+        // debugger
+        if(grade > 89 && grade <= 100){
+            return "green"
+        }
+        else if (grade > 79 && grade <= 89){
+            return "blue"
+        }
+        else if (grade > 69 && grade <= 79){
+            return "gold"
+        }
+        else{
+            return "red"
+        }
+    }
     
     render() {
         // console.log(this.props.location.pathname.split("/"))
         // console.log(this.props.currentAssignment)
-        // console.log(this.state.grade)
+        // console.log(Object.keys(this.props.currentAssignment).length)
+        // console.log(this.props.location.pathname.split("/")[4])
         return (
             <div className="ui grid container" style={{marginTop: "10px"}}>
                 <div className="six wide column">
@@ -103,37 +118,51 @@ class SubmittedAssignments extends Component {
                             
                         </div>
                         {
-                                Object.keys(this.props.currentAssignment).length !== 0 && this.props.currentAssignment.submissions.length !== 0 ?
-                                this.props.currentAssignment.submissions.map(submission => {
-                                    return <div key={submission.id} className="ui segment">
-                                        <h4>From: {submission.student.first_name}</h4>
-                                        
-                                        <button className="ui yellow button" onClick={()=>{
-                                            this.handleAssignmentClick(submission.id)
-                                            }}>View</button>
-                                        {
-                                            submission.created_at !== submission.updated_at ?
-                                            <Fragment>
-                                                <h4>Grade Assigned: </h4>
-                                                    {/* <span style={this.checkGradeColor(submission.grade_assigned)}>{submission.grade_assigned}</span> %</h4> */}
-                                                <div className="ui indicating progress stats" data-percent={submission.grade_assigned} >
-                                                    <div className="bar" style={{width: `${submission.grade_assigned}%`}}>
-                                                        <div className="progress">{submission.grade_assigned}%</div>
+                            // before checks for object.keys length !== 0
+                            this.state.loaded ?
+                            <Fragment>
+                            {  
+                                this.props.currentAssignment.submissions.length !== 0 ?
+                                    
+                                    this.props.currentAssignment.submissions.map(submission => {
+                                        return <div key={submission.id} className="ui segment">
+                                            <h4>From: {submission.student.first_name}</h4>
+                                            
+                                            <button className="ui yellow button" onClick={()=>{
+                                                this.handleAssignmentClick(submission.id)
+                                                }}>View</button>
+                                            {
+                                                submission.created_at !== submission.updated_at ?
+                                                <Fragment>
+                                                    <h4>Grade Assigned: </h4>
+                                                        {/* <span style={this.checkGradeColor(submission.grade_assigned)}>{submission.grade_assigned}</span> %</h4> */}
+                                                    <div className="ui indicating progress stats" data-percent={submission.grade_assigned} >
+                                                        {/* <div className="bar" style={{width: `${submission.grade_assigned}%`}}> */}
+                                                        <div className="bar" style={{width: `${submission.grade_assigned}%`, backgroundColor: this.checkGradeColor(submission.grade_assigned)}}>
+                                                            <div className="progress">{submission.grade_assigned}%</div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                {/* <h4>Percentage: {(submission.grade_assigned / (submission.answers.length * 10)) * 100} %</h4> */}
-                                            </Fragment>
-                    
-                                            :
-                                            null
-                                        }
-                                    </div>
-                                })
+                                                    {/* <h4>Percentage: {(submission.grade_assigned / (submission.answers.length * 10)) * 100} %</h4> */}
+                                                </Fragment>
+                                                :
+                                                null
+                                            }
+                                        </div>
+                                    })
                                 :
                                 <div className="ui segment">
                                     <h1>No submissions yet!</h1>
                                 </div>
                             }
+                            </Fragment>
+                            
+                            :
+                            <div className="ui segment">
+                                <div className="ui active inverted dimmer">
+                                    <div className="ui small text loader">Loading</div>
+                                </div>
+                            </div>
+                        }         
                     </div>
                 </div>
 

@@ -5,6 +5,7 @@ class Api::V1::SubmissionsController < ApplicationController
     end
 
     def show 
+        byebug
         @submission = Submission.find(params[:id])
         render json: @submission
     end

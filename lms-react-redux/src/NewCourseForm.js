@@ -25,6 +25,7 @@ class NewCourseForm extends Component {
     }
 
     handleSubmit = (e) => {
+        const token = localStorage.getItem("token")
         e.preventDefault()
         // console.log(this.state)
         if(this.state.subject_id){
@@ -34,7 +35,8 @@ class NewCourseForm extends Component {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Accept": "application/json"
+                "Accept": "application/json",
+                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({
                 course: {

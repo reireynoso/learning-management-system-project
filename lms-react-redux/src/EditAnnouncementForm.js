@@ -19,12 +19,14 @@ class EditAnnouncementForm extends Component {
     }
 
     handleOnSubmit = (e) => {
+        const token = localStorage.getItem("token")
         e.preventDefault();
         fetch(`http://localhost:3000/api/v1/courses/${this.props.url}/announcements/${this.state.id}`,{
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
-                "Accept": "application/json"
+                "Accept": "application/json",
+                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({
                 announcement: this.state
@@ -44,7 +46,7 @@ class EditAnnouncementForm extends Component {
     }
     render() {
         // console.log(this.props)
-        console.log(this.props.announcement)
+        // console.log(this.props.announcement)
         // console.log(this.state)
         return (
             <div className="ui segment">

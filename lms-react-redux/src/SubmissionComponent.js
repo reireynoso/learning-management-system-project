@@ -10,37 +10,29 @@ class SubmissionComponent extends Component {
         // assignment_id: '',
         student_id: this.props.currentUser.id,
         
-        // answer1: '',
-        // answer2: '',
-        // answer3: '',
-        // answer4: ''
     }
     handleSubmissionSubmit = (e) => {
         e.preventDefault()
-        
+        const token = localStorage.getItem("token")
             // console.log(this.props.history.location.pathname)
             // this.props.addAssignment(this.state)
             fetch(`http://localhost:3000/api/v1/submissions`,{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Accept": "application/json"
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify({
                     submission: {...this.state, assignment_id: this.props.assignmentObject.id}
                 })
             })
             .then(resp => resp.json())
-            .then(data => {
-                
+            .then(data => {            
             //  console.log(data)  
-            //  this.props.setSubmission(data)
-            // console.log(data)
             this.props.history.push('/courses')
-            
             })
-            // this.props.setSubmission(this.state)
-        
+            // this.props.setSubmission(this.state) 
     }
     handleOnChange = (e) => {
         this.setState({
@@ -64,7 +56,6 @@ class SubmissionComponent extends Component {
                             })}   
                         </div>
                         <input type="submit" value="Submit Assignment" className="ui submit button"></input>
-                        
                     </form>
             </div>
         )

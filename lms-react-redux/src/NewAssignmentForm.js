@@ -18,6 +18,7 @@ class NewAssignmentForm extends Component {
     }
 
     handleSubmit = (e) => {
+        const token = localStorage.getItem("token")
         e.preventDefault()
         // console.log(this.props.history.location.pathname)
         // this.props.addAssignment(this.state)
@@ -25,7 +26,8 @@ class NewAssignmentForm extends Component {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Accept": "application/json"
+                "Accept": "application/json",
+                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({
                 assignment: this.state

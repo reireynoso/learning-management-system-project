@@ -12,14 +12,20 @@ function NavBar(props) {
                             {/* <a className="toc item">
                                 <i className="sidebar icon"></i>
                             </a> */}
-                            <div className="active item"><Link to = "/home">Home</Link></div>
-                            <div className="item"><Link to="/about">
-                                About
-                            </Link></div>
-                            {/* <Link to="/courses">
-                                About
-                            </Link> */}
-                            {/* <div className="item">View Courses</div> */}
+                            <div className="left item">
+                                <Link to = "/home">
+                                    <div className="ui inverted button">
+                                        Home
+                                    </div>
+                                </Link>
+
+                                <Link to="/about">
+                                    <div className="ui inverted button">
+                                        About
+                                    </div>
+                                </Link>
+                           </div>
+                
                             <div className="right item">
                                 {
                                     Object.keys(props.currentUser).length !== 0 ? //checking to see if object is empty

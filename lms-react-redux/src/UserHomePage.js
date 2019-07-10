@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import CourseContainer from './CourseContainer'
 import {Link} from 'react-router-dom'
+import {Animated} from 'react-animated-css'
 
 function UserHomePage(props) {
     // console.log(props)
@@ -9,6 +10,7 @@ function UserHomePage(props) {
     return (
         <div>
             <br></br>
+            <Animated animationIn="fadeInRight" animationInDuration={2000} animationOut="fadeOut" isVisible={true}>
             {
                 props.currentUser.position === 'teacher' ?
 
@@ -22,6 +24,8 @@ function UserHomePage(props) {
                     <h1>Classes You Are Enrolled In</h1>
                 </React.Fragment> 
             }
+            </Animated>
+            <br></br>
             <CourseContainer courses={props.currentUser.courses}/>
             {/* <CourseContainer courses={props.currentUserCourses}/> */}
         </div>

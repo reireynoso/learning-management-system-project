@@ -4,10 +4,14 @@ import {connect} from 'react-redux'
 
 function CourseCard(props) {
     // console.log(props.course.id)
+    const token = localStorage.getItem("token")
     function handleOnClick(){
         // console.log(props.course.id)
         fetch(`http://localhost:3000/api/v1/teachers/${props.currentUser.id}/courses/${props.course.id}`,{
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
         })
         .then(resp => resp.json())
         .then(data => {
@@ -17,10 +21,15 @@ function CourseCard(props) {
         })
     }
     function handleStudentClick(){
+        const token = localStorage.getItem("token")
         // console.log(props.course)
         // console.log(props.currentUser)
         let currentEnrollment;
-        fetch(`http://localhost:3000/api/v1/students/${props.currentUser.id}/enrollments`)
+        fetch(`http://localhost:3000/api/v1/students/${props.currentUser.id}/enrollments`,{
+            headers: {
+                "Authorization": `Bearer ${token}`
+           }
+        })
         .then(resp => resp.json())
         .then(data => {
             // console.log(data)
@@ -34,13 +43,17 @@ function CourseCard(props) {
             removeClickedCourse(currentEnrollment.id)
         })
         // console.log(currentEnrollment)
-    
-        // props.removeCourse(props.course.id)
+  
     }
 
     function removeClickedCourse(id){
+        const token = localStorage.getItem("token")
         fetch(`http://localhost:3000/api/v1/students/${props.currentUser.id}/enrollments/${id}`,{
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`
+           }
+
         })
         .then(resp => resp.json())
         .then(data => {
@@ -50,7 +63,7 @@ function CourseCard(props) {
     }
     return (
         <div className="column">
-                <div className="ui segment">
+                <div className="ui segment course">
                     <p>{props.course.subject.name}</p>
                     <Link to={{
                         pathname: `/courses/${props.course.id}`,
