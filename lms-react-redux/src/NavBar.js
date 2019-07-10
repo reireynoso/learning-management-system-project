@@ -7,7 +7,7 @@ function NavBar(props) {
     return (
             <div className="pusher">
                 <div className="ui inverted vertical masthead center aligned segment">
-                    <div className="ui container" style={{height:"12vh"}}>
+                    <div className="ui container" style={{height:"15vh"}}>
                         <div className="ui large secondary inverted pointing menu">
                             {/* <a className="toc item">
                                 <i className="sidebar icon"></i>

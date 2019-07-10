@@ -16,9 +16,11 @@ function LandingPage() {
                                     Manage teaching and learning with this Learning Management System.
                                 </h1>
                             </Animated>
+                            <br></br>
                             <Animated animationIn="fadeInRight" animationInDuration={2000} animationOut="fadeOut" isVisible={true}>
-                                <h2>LMS helps connect teachers and students, boost collaboration, and share educational resources</h2>
+                                <h3>LMS helps connect teachers and students, boost collaboration, and share educational resources</h3>
                             </Animated>
+                            <br></br>
                             <Animated animationInDelay={2000} animationOut="fadeOut" isVisible={true}>
                                 <Link to="/courses">
                                     <div className="ui huge primary button">Go to Class <i className="right arrow icon"></i></div>
