@@ -10,7 +10,7 @@ function LandingPage() {
         <div>
             <div className="pusher">
                 <div className="ui inverted vertical masthead center aligned segment">
-                    <div className="ui text container" style={{height:"85vh"}}>
+                    <div className="ui text container" style={{height:"82vh"}}>
                             <Animated animationIn="fadeInLeft" animationInDuration={2000} animationOut="fadeOut" isVisible={true}>
                                 <h1 className="ui inverted header">
                                     Manage teaching and learning with this Learning Management System.

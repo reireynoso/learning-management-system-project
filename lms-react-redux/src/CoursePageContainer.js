@@ -68,11 +68,18 @@ class CoursePageContainer extends Component {
         })
     }
 
+    sortAnnouncementsByRecent = (announcements) => {
+        // console.log(announcements)
+        announcements.sort((a, b) => (a.created_at < b.created_at) ? 1 : -1)
+        return announcements
+    }
+
     render() {
         // let url = this.props.history.location.pathname.split("/")
         // console.log(url[url.length-1])
         // console.log(this.state.assignmentObject)
         // console.log(this.props.currentCourse)
+        // console.log(this.props.course.announcements)
         return (
             <div className="ui grid container" style={{marginTop: "10px"}}>
                 <div className="six wide column">
@@ -136,7 +143,8 @@ class CoursePageContainer extends Component {
                             </div>
                             
                             :
-                            this.props.course.announcements.map(announcement => {
+                            // this.props.course.announcements.map(announcement => {
+                            this.sortAnnouncementsByRecent(this.props.course.announcements).map(announcement => {
                                 if (announcement.id === this.state.editAssignmentId){
                                     return <EditAnnouncementForm key={announcement.id} url={this.url[this.url.length-1]} handleEditClick={this.handleEditClick} announcement={announcement}/>
                                 }

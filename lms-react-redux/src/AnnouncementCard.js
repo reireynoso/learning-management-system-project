@@ -2,6 +2,7 @@
 import {connect} from 'react-redux'
 import React, { Component, Fragment } from 'react'
 import {Confirm} from "semantic-ui-react"
+import Moment from 'react-moment'
 
 const token = localStorage.getItem("token")
 
@@ -153,11 +154,13 @@ class AnnouncementCard extends Component {
 
     render() {
         // console.log(this.state.allComments)
-        const {id, title, information, video_url} = this.props.announcement
+        const {id, title, information, video_url,created_at} = this.props.announcement
         return (
         <div className="ui segment">
             <h1>{title}</h1>
             <p>{information}</p>
+            <p>Posted on: <Moment format="MM/DD/YYYY">{created_at}</Moment> </p>
+            
             {
                 video_url ?
                 <iframe width="500" height="300" src={this.embedIt(video_url)} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>

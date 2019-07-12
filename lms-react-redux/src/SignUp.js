@@ -3,6 +3,9 @@ import {connect} from 'react-redux'
 import teacher from './noun_Teacher_642198.svg'
 import student from './noun_student_63368.svg'
 
+// const axios = require('axios');
+// let imageURL;
+
 class SignUp extends Component {
     state = {
         username: '',
@@ -58,6 +61,7 @@ class SignUp extends Component {
                         last_name: last_name,
                         bio: bio,
                         image_url: image_url,
+                        // image_url: imageURL,
                         position: position
                     }
                 })
@@ -144,6 +148,8 @@ class SignUp extends Component {
                     <div className="field">
                         <label>Image URL</label>
                         <input type="text" name="image_url" required onChange={this.handleOnChange} value={this.state.image_url} placeholder="Image URL"/>
+                        {/* <input type="file" className="inputfile ui huge button" name="image_url" required onChange={this.handlePhotoUpload} placeholder="Image URL"/> */}
+                        
                     </div>
                     
 

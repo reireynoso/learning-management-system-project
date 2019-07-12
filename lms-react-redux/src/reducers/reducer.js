@@ -94,7 +94,7 @@ function reducer(state= defaultState, action){
         //     return {...state, currentCourse : {...state.currentCourse, assignments: submitted}}
 
         case "ADD_ANNOUNCEMENT":
-            return {...state, currentCourse : {...state.currentCourse, announcements: [...state.currentCourse.announcements, action.payload]}}
+            return {...state, currentCourse : {...state.currentCourse, announcements: [action.payload, ...state.currentCourse.announcements]}}
         case "EDIT_ANNOUNCEMENT":
             const updatedAnnouncements = state.currentCourse.announcements.map(announcement => {
                 if(announcement.id === action.payload.id){

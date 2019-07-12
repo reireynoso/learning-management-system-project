@@ -6,7 +6,8 @@ import SubmissionComponent from './SubmissionComponent'
 class AssignmentProblemsComponent extends Component {
     render() {
         // console.log(this.props)
-        const {id, due_date, name, note, problems} = this.props.assignmentObject
+        // const {id, due_date, name, note, problems} = this.props.assignmentObject
+        const { name} = this.props.assignmentObject
         return (
             <div>
                 <h1>{name}</h1>
@@ -34,7 +35,6 @@ class AssignmentProblemsComponent extends Component {
                     <SubmissionComponent currentUser={this.props.currentUser} assignmentObject={this.props.assignmentObject}/>
                     
                 }
-                
                 <br></br>
                 {/* <br></br> */}
             </div>

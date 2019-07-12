@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
 
 class SubmissionComponent extends Component {
@@ -40,7 +39,7 @@ class SubmissionComponent extends Component {
         })
     }
     render() {
-        const {id, due_date, name, note, problems} = this.props.assignmentObject
+        const {problems} = this.props.assignmentObject
         // console.log(this.props.history)
         return (
             <div>

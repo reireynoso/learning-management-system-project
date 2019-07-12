@@ -7,7 +7,6 @@ import NavBar from './NavBar'
 import { Switch, Route, Redirect } from 'react-router-dom';
 import {connect} from 'react-redux'
 import UserHomePage from './UserHomePage';
-import CoursePage from './CoursePageContainer'
 import CoursePageContainer from './CoursePageContainer';
 import NewCourseForm from './NewCourseForm'
 import RegisterCourseComponent from './RegisterCourseComponent'
@@ -48,7 +47,7 @@ class App extends Component {
     })
     .then(resp => resp.json())
     .then(data => {
-        console.log(data)
+        // console.log(data)
         this.props.setUser(data)
         // this.props.setUserCourses(data.courses)
         
