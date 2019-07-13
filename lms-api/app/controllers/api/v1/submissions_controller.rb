@@ -47,7 +47,12 @@ class Api::V1::SubmissionsController < ApplicationController
         total_answers = @submission.answers.count
         grade_percentage = (total_points.to_f / total_answers.to_f) * 10
         # byebug
-        @submission.update(grade_assigned: grade_percentage)
+        if grade_percentage == @submission.grade_assigned 
+            @submission.update(grade_assigned: 1)
+            @submission.update(grade_assigned: grade_percentage)
+        else
+            @submission.update(grade_assigned: grade_percentage)
+        end
         # byebug
         render json: @submission
         # render json: {submission: SubmissionSerializer.new(@submission)}
