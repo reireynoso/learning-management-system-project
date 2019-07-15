@@ -10,7 +10,7 @@ export default class GradingComponent extends Component {
         // if(this.state.points_assigned >= 0 && this.state.points_assigned <= 10){
         if(e.target.value >= 0 && e.target.value <= 10){
             const token = localStorage.getItem("token")
-            fetch(`http://localhost:3000/api/v1/answers/${this.props.answer.id}`,{
+            fetch(`https://lms-api-rails.herokuapp.com/api/v1/answers/${this.props.answer.id}`,{
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -24,7 +24,7 @@ export default class GradingComponent extends Component {
             })
             .then(resp => resp.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 // this.props.addTallyToGrade(data.points_assigned)
             })
         }
@@ -42,12 +42,12 @@ export default class GradingComponent extends Component {
         }
     }
 
-    handleOnChange = (e) => {
-        console.log(e.target.value)
-        // this.setState({
-        //     [e.target.name]: e.target.value
-        // })
-    }
+    // handleOnChange = (e) => {
+    //     // console.log(e.target.value)
+    //     // this.setState({
+    //     //     [e.target.name]: e.target.value
+    //     // })
+    // }
 
 
     render() {

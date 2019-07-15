@@ -4,7 +4,7 @@ import React, { Component, Fragment } from 'react'
 import {Confirm} from "semantic-ui-react"
 import Moment from 'react-moment'
 
-const token = localStorage.getItem("token")
+
 
 class AnnouncementCard extends Component {
 
@@ -36,7 +36,8 @@ class AnnouncementCard extends Component {
 
     handleOnClick = (id) =>{
         // console.log(id)
-        fetch(`http://localhost:3000/api/v1/courses/${this.props.url}/announcements/${id}`,{
+        const token = localStorage.getItem("token")
+        fetch(`https://lms-api-rails.herokuapp.com/api/v1/courses/${this.props.url}/announcements/${id}`,{
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${token}`
@@ -75,7 +76,8 @@ class AnnouncementCard extends Component {
         // this.setState({
         //     allComments: deletedComment
         // })
-        fetch(`http://localhost:3000/api/v1/courses/${this.props.url}/announcements/${this.props.announcement.id}/comments/${commentId}`,{
+        const token = localStorage.getItem("token")
+        fetch(`https://lms-api-rails.herokuapp.com/api/v1/courses/${this.props.url}/announcements/${this.props.announcement.id}/comments/${commentId}`,{
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${token}`
@@ -94,7 +96,8 @@ class AnnouncementCard extends Component {
 
     handleCommentSubmit = (e) => {
         e.preventDefault()
-        fetch(`http://localhost:3000/api/v1/courses/${this.props.url}/announcements/${this.props.announcement.id}/comments`,{
+        const token = localStorage.getItem("token")
+        fetch(`https://lms-api-rails.herokuapp.com/api/v1/courses/${this.props.url}/announcements/${this.props.announcement.id}/comments`,{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -114,6 +117,7 @@ class AnnouncementCard extends Component {
             })
             .then(resp => resp.json())
             .then(data => {
+                // console.log(data)
                 this.setState({
                     allComments: [...this.state.allComments, data]
                 })
@@ -130,7 +134,12 @@ class AnnouncementCard extends Component {
             })
         }
         else{
-            fetch(`http://localhost:3000/api/v1/courses/${this.props.url}/announcements/${id}/comments`, {
+            // console.log(id)
+            // console.log(this.props.url)
+            // console.log(token)
+            const token = localStorage.getItem("token")
+            // debugger
+            fetch(`https://lms-api-rails.herokuapp.com/api/v1/courses/${this.props.url}/announcements/${id}/comments`, {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
@@ -138,7 +147,7 @@ class AnnouncementCard extends Component {
             .then(resp => resp.json())
             .then(data => {
                 // debugger
-                // console.log(data)
+                
                 //return ALL comments. filters which comments belong to the specific announcement clicked
                 let specificAnnouncementComments = data.filter(comment => {
                     return comment.announcement.id === id 
@@ -153,7 +162,8 @@ class AnnouncementCard extends Component {
     }
 
     render() {
-        // console.log(this.state.allComments)
+        // console.log(token)
+        // debugger
         const {id, title, information, video_url,created_at} = this.props.announcement
         return (
         <div className="ui segment">

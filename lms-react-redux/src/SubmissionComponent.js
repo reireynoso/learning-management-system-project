@@ -15,7 +15,7 @@ class SubmissionComponent extends Component {
         const token = localStorage.getItem("token")
             // console.log(this.props.history.location.pathname)
             // this.props.addAssignment(this.state)
-            fetch(`http://localhost:3000/api/v1/submissions`,{
+            fetch(`https://lms-api-rails.herokuapp.com/api/v1/submissions`,{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -26,7 +26,7 @@ class Login extends Component {
         e.preventDefault()
         // console.log(e.target)
         if(this.state.position){
-            fetch("http://localhost:3000/api/v1/login", {
+            fetch("https://lms-api-rails.herokuapp.com/api/v1/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -39,6 +39,7 @@ class Login extends Component {
             .then(res => res.json())
             .then(user => {
                 localStorage.setItem("token", user.jwt)
+                // console.log(user.jwt)
                 if(user.failure){
                     // console.log(user.failure)
                     // alert(user.failure)

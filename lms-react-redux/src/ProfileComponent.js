@@ -149,7 +149,7 @@ class ProfileComponent extends Component {
         const url = urlSplit[3]
         const path = urlSplit[2]// checks where to fetch. either student or teacher path
         
-        fetch(`http://localhost:3000/api/v1/${path}s/${url}/${path}_grades`, {
+        fetch(`https://lms-api-rails.herokuapp.com/api/v1/${path}s/${url}/${path}_grades`, {
             headers: {
                 "Authorization": `Bearer ${token}`
            }

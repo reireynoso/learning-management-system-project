@@ -21,7 +21,7 @@ class NewAnnouncementForm extends Component {
         const token = localStorage.getItem("token")
         e.preventDefault();
         // console.log(this.state)
-        fetch(`http://localhost:3000/api/v1/courses/${this.props.url}/announcements`,{
+        fetch(`https://lms-api-rails.herokuapp.com/api/v1/courses/${this.props.url}/announcements`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

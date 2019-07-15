@@ -43,7 +43,7 @@ class CoursePageContainer extends Component {
         const token = localStorage.getItem("token")
         // let url = this.props.history.location.pathname.split("/")
         // console.log(url[url.length-1])
-        fetch(`http://localhost:3000/api/v1/courses/${this.url[this.url.length-1]}`, {
+        fetch(`https://lms-api-rails.herokuapp.com/api/v1/courses/${this.url[this.url.length-1]}`, {
            headers: {
                 "Authorization": `Bearer ${token}`
            }

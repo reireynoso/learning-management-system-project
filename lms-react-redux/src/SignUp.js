@@ -44,7 +44,7 @@ class SignUp extends Component {
         // console.log(e.target)
         // let position = this.state.position
         if(position){
-            fetch(`http://localhost:3000/api/v1/${this.state.position}s`, {
+            fetch(`https://lms-api-rails.herokuapp.com/api/v1/${this.state.position}s`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -22,7 +22,7 @@ class Assignment extends Component {
     
     handleOnClick = (id) => {
         const token = localStorage.getItem("token")
-        fetch(`http://localhost:3000/api/v1/courses/${this.props.url}/assignments/${id}`,{
+        fetch(`https://lms-api-rails.herokuapp.com/api/v1/courses/${this.props.url}/assignments/${id}`,{
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${token}`

@@ -21,7 +21,7 @@ class SubmittedAssignments extends Component {
     handleSubmitGrade = () => {
         // let percentage_grade =  (this.state.grade / (this.props.currentAssignment.problems.length * 10)) * 100 //each answer is worth 10 points max
         const token = localStorage.getItem("token")
-        fetch(`http://localhost:3000/api/v1/submissions/${this.state.currentSubmissionView}`,{
+        fetch(`https://lms-api-rails.herokuapp.com/api/v1/submissions/${this.state.currentSubmissionView}`,{
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
@@ -35,7 +35,7 @@ class SubmittedAssignments extends Component {
         })
         .then(resp => resp.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
             this.props.updateSubmission(data)
             this.setState({
                 currentSubmissionView: ''
@@ -55,7 +55,7 @@ class SubmittedAssignments extends Component {
         const assignment_id = this.props.location.pathname.split("/")[4]
         // console.log(assignment_id)
         const token = localStorage.getItem("token")
-        fetch(`http://localhost:3000/api/v1/courses/${course_id}/assignments/${assignment_id}`, {
+        fetch(`https://lms-api-rails.herokuapp.com/api/v1/courses/${course_id}/assignments/${assignment_id}`, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }

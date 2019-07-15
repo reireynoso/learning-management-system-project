@@ -35,7 +35,7 @@ function CourseCard(props) {
 
     function handleOnClick(){
         // console.log(props.course.id)
-        fetch(`http://localhost:3000/api/v1/teachers/${props.currentUser.id}/courses/${props.course.id}`,{
+        fetch(`https://lms-api-rails.herokuapp.com/api/v1/teachers/${props.currentUser.id}/courses/${props.course.id}`,{
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${token}`
@@ -53,7 +53,7 @@ function CourseCard(props) {
         // console.log(props.course)
         // console.log(props.currentUser)
         let currentEnrollment;
-        fetch(`http://localhost:3000/api/v1/students/${props.currentUser.id}/enrollments`,{
+        fetch(`https://lms-api-rails.herokuapp.com/api/v1/students/${props.currentUser.id}/enrollments`,{
             headers: {
                 "Authorization": `Bearer ${token}`
            }
@@ -76,7 +76,7 @@ function CourseCard(props) {
 
     function removeClickedCourse(id){
         const token = localStorage.getItem("token")
-        fetch(`http://localhost:3000/api/v1/students/${props.currentUser.id}/enrollments/${id}`,{
+        fetch(`https://lms-api-rails.herokuapp.com/api/v1/students/${props.currentUser.id}/enrollments/${id}`,{
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${token}`

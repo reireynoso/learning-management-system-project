@@ -40,7 +40,7 @@ class App extends Component {
   componentDidMount = () => {
     const token = localStorage.getItem("token")
     if(token){
-      fetch("http://localhost:3000/api/v1/auto_login",{
+      fetch("https://lms-api-rails.herokuapp.com/api/v1/auto_login",{
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -54,11 +54,11 @@ class App extends Component {
     })
     
     }
-    fetch(`http://localhost:3000/api/v1/subjects`)
+    fetch(`https://lms-api-rails.herokuapp.com/api/v1/subjects`)
     .then(resp => resp.json())
     .then(data => this.props.setSubjects(data))
 
-    fetch(`http://localhost:3000/api/v1/courses`)
+    fetch(`https://lms-api-rails.herokuapp.com/api/v1/courses`)
     .then(resp => resp.json())
     .then(data => {
       // console.log(data)

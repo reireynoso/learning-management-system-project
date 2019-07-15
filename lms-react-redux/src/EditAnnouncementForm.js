@@ -21,7 +21,7 @@ class EditAnnouncementForm extends Component {
     handleOnSubmit = (e) => {
         const token = localStorage.getItem("token")
         e.preventDefault();
-        fetch(`http://localhost:3000/api/v1/courses/${this.props.url}/announcements/${this.state.id}`,{
+        fetch(`https://lms-api-rails.herokuapp.com/api/v1/courses/${this.props.url}/announcements/${this.state.id}`,{
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

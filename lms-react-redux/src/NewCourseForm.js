@@ -31,7 +31,7 @@ class NewCourseForm extends Component {
         if(this.state.subject_id){
 
         
-        fetch(`http://localhost:3000/api/v1/teachers/${this.state.teacher_id}/courses`,{
+        fetch(`https://lms-api-rails.herokuapp.com/api/v1/teachers/${this.state.teacher_id}/courses`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

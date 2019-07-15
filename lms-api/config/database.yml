@@ -23,6 +23,7 @@ default: &default
 
 development:
   <<: *default
+  adapter: postgresql
   database: practice-api_development
 
   # The specified database role being used to connect to postgres.
@@ -80,6 +81,7 @@ test:
 #
 production:
   <<: *default
+  adapter: postgresql
   database: practice-api_production
   username: practice-api
   password: <%= ENV['PRACTICE-API_DATABASE_PASSWORD'] %>

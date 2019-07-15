@@ -1,24 +1,44 @@
-# README
+# Learning Management System API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Learning Management System is an application modeled after Google Classrooms, and Blackboard. Teachers and students collaborate in this system. Teachers are able to create classrooms, announcements, assignments, grade assignments. Students are able to register for those courses and, view announcements, comment on those announcements for assistance or feedback, and submit assignments. Chart.js is utilized to organize grades for both students and teachers. It's an entire application dedication to education management.
 
-Things you may want to cover:
+## Getting Started
+First, fork and clone this repo. Change directory into lms-api. 
 
-* Ruby version
+### Prerequisites
+Ruby and Rails and Postgresql have to be installed on your computer. 
 
-* System dependencies
+* If it is not installed, start by going in your terminal, and type:
 
-* Configuration
+brew install rbenv ruby-build
 
-* Database creation
+### Install Ruby
+rbenv install 2.6.3
+rbenv global 2.6.3
+ruby -v (to verify)
 
-* Database initialization
+### Install Rails
+gem install rails -v 5.2.3
+rails -v (to verify)
 
-* How to run the test suite
+### Install Postgresql
+brew install postgresql
 
-* Services (job queues, cache servers, search engines, etc.)
+Once the Ruby on Rails has been setup and installed, run 
 
-* Deployment instructions
+bundle install 
+rails db:create 
+rails db:migrate 
+rails db:seed 
+rails server 
 
-* ...
+seqentially on your terminal to get the rails api started.
+
+## Built With
+Ruby on Rails - The api server used
+
+## Authors
+Reinald Reynoso
+
+## Acknowledgments
+* Flatiron School

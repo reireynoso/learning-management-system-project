@@ -15,7 +15,7 @@ class NewProblemsComponent extends Component {
     handleOnSubmit = (e) => {
         const token = localStorage.getItem("token")
         e.preventDefault();
-        fetch(`http://localhost:3000/api/v1/courses/${this.props.assignmentObject.course_id}/assignments/${this.props.assignmentObject.id}/problems`,{
+        fetch(`https://lms-api-rails.herokuapp.com/api/v1/courses/${this.props.assignmentObject.course_id}/assignments/${this.props.assignmentObject.id}/problems`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

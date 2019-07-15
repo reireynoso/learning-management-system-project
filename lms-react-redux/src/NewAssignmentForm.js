@@ -22,7 +22,7 @@ class NewAssignmentForm extends Component {
         e.preventDefault()
         // console.log(this.props.history.location.pathname)
         // this.props.addAssignment(this.state)
-        fetch(`http://localhost:3000/api/v1/courses/${this.props.history.location.pathname.split("/")[2]}/assignments`,{
+        fetch(`https://lms-api-rails.herokuapp.com/api/v1/courses/${this.props.history.location.pathname.split("/")[2]}/assignments`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

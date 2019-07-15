@@ -1,68 +1,25 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Task Academy
 
-## Available Scripts
+Learning Management System is an application modeled after Google Classrooms, and Blackboard. Teachers and students collaborate in this system. Teachers are able to create classrooms, announcements, assignments, grade assignments. Students are able to register for those courses and, view announcements, comment on those announcements for assistance or feedback, and submit assignments. Chart.js is utilized to organize grades for both students and teachers. It's an entire application dedication to education management.
 
-In the project directory, you can run:
+Explore Deployed Version: https://lms-react.herokuapp.com/login
 
-### `npm start`
+## Getting Started
+First, fork and clone this repo. Change directory into lms-react-redux. 
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Running the App
+Once the rails server is running, run 'npm start' to start react. Keep in mind that this app has been deployed to heroku and the fetch urls are dependent on those routes. If for some reason, heroku is not working, change routes to rails api, from 'https://lms-api-rails.herokuapp.com/api/v1' to 'localhost:3000/api/v1'.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
 
-### `npm test`
+## Built With
+Semantic UI - CSS library used
+Animate.css
+ReactJS - Javascript library used
+React-Redux
+React-Routes
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Authors
+Reinald Reynoso
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Acknowledgments
+* Flatiron School

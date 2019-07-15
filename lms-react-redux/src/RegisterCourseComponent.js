@@ -34,7 +34,7 @@ class RegisterCourseComponent extends Component {
         console.log(course_id)
         // console.log(this.state)
         const token = localStorage.getItem("token")
-        fetch(`http://localhost:3000/api/v1/students/${this.props.url}/enrollments`,{
+        fetch(`https://lms-api-rails.herokuapp.com/api/v1/students/${this.props.url}/enrollments`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
