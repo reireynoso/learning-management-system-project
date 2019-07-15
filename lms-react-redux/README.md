@@ -1,4 +1,4 @@
-# Task Academy
+# Learning Management System
 
 Learning Management System is an application modeled after Google Classrooms, and Blackboard. Teachers and students collaborate in this system. Teachers are able to create classrooms, announcements, assignments, grade assignments. Students are able to register for those courses and, view announcements, comment on those announcements for assistance or feedback, and submit assignments. Chart.js is utilized to organize grades for both students and teachers. It's an entire application dedication to education management.
 
